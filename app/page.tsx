@@ -6,12 +6,12 @@ import Projects from "@/components/Projects";
 import Experience from "@/components/Experience";
 import Footer from "@/components/Footer";
 import WhatsAppButton from "@/components/WhatsAppButton";
+import NeuralBackground from "@/components/NeuralBackground";
 
 export default function Home() {
   return (
-    <main className="relative min-h-screen bg-zinc-950 overflow-x-hidden">
-      {/* Ambient grid background */}
-      <div className="fixed inset-0 grid-bg opacity-50 pointer-events-none" />
+    <main className="relative min-h-screen bg-black overflow-x-hidden">
+      <NeuralBackground />
 
       <Navbar />
       <Hero />
