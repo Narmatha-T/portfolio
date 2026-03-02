@@ -1,150 +1,135 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { ExternalLink } from "lucide-react";
+import { ExternalLink, Shield, Users, Fish, Music } from "lucide-react";
 
 const PROJECTS = [
   {
     id: "01",
+    icon: Shield,
     name: "Meguru",
-    tagline: "Biometric Access Control",
+    tagline: "Number Plate & Face Authentication System",
     description:
-      "Enterprise-grade number plate & face authentication system. YOLO-based license plate detection fused with FaceNet512 facial recognition.",
+      "End-to-end biometric access control platform combining YOLO-based license plate detection with FaceNet512 facial recognition. Deployed for enterprise security workflows.",
     stack: ["YOLO v8", "FaceNet512", "Django", "Redis", "AWS"],
     demo: "https://meguru.run/",
     category: "Computer Vision",
-    accent: "col-span-12 md:col-span-7",
-    rowSpan: "row-span-1",
-    imageBg: "from-zinc-900 to-black",
   },
   {
     id: "02",
+    icon: Users,
     name: "Crowd Monitor",
-    tagline: "Real-time Density Estimation",
+    tagline: "Real-time Crowd Density Estimation",
     description:
-      "Live crowd surveillance using COCO-SSD. Heatmap generation at high-frequency inference.",
-    stack: ["COCO-SSD", "TensorFlow.js", "WebSocket"],
+      "Live web-based crowd surveillance using COCO-SSD for person detection and density heatmap generation. Handles high-frequency inference with minimal latency.",
+    stack: ["COCO-SSD", "TensorFlow.js", "WebSocket", "React"],
     demo: "https://crowding.aicam.jp/",
     category: "Real-time AI",
-    accent: "col-span-12 md:col-span-5",
-    rowSpan: "row-span-1",
-    imageBg: "from-zinc-950 to-zinc-900",
   },
   {
     id: "03",
+    icon: Fish,
     name: "Fish Classifier",
-    tagline: "Edge AI in the Browser",
+    tagline: "Browser-based Real-time Fish Classification",
     description:
-      "In-browser real-time marine species identification via TensorFlow.js. Zero server inference cost.",
-    stack: ["TensorFlow.js", "MobileNet", "Next.js"],
+      "In-browser AI model for marine species identification running entirely client-side via TensorFlow.js — zero server inference cost.",
+    stack: ["TensorFlow.js", "MobileNet", "Next.js", "JavaScript"],
     demo: "https://aicam.jp/effectively/fish-classification",
     category: "Edge AI",
-    accent: "col-span-12 md:col-span-5",
-    rowSpan: "row-span-1",
-    imageBg: "from-zinc-900 to-black",
   },
   {
     id: "04",
+    icon: Music,
     name: "CRAYON",
-    tagline: "High-Concurrency Concert Platform",
+    tagline: "High-Concurrency Multi-Tenant Concert System",
     description:
-      "Multi-tenant ticketing & access system for major Japanese concerts. Redis queue handles thousands of concurrent users.",
+      "Architected a resilient ticketing and access management platform for major concert events. Supports thousands of concurrent users with Redis-based queue management.",
     stack: ["Django", "Redis", "Celery", "PostgreSQL", "Docker", "AWS"],
     demo: null,
     category: "Backend Systems",
-    accent: "col-span-12 md:col-span-7",
-    rowSpan: "row-span-1",
-    imageBg: "from-zinc-950 to-zinc-900",
   },
 ];
 
 export default function Projects() {
   return (
-    <section id="projects" className="section-padding border-t border-zinc-900">
+    <section id="projects" className="section-padding border-t border-zinc-800/60">
       <div className="max-w-6xl mx-auto">
-        <motion.p
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          className="font-mono-label text-[10px] tracking-[0.3em] uppercase text-zinc-600 mb-10"
-        >
-          02 — The Work
-        </motion.p>
+        {/* Section label */}
+        <p className="text-xs font-medium tracking-[0.3em] uppercase text-zinc-500 mb-4">
+          02 — Projects
+        </p>
+        <div className="flex items-end justify-between mb-12">
+          <h2 className="text-3xl md:text-4xl font-bold text-zinc-100">
+            Featured Work
+          </h2>
+          <span className="hidden sm:block text-xs text-zinc-600 tracking-widest uppercase">
+            {PROJECTS.length} Projects
+          </span>
+        </div>
 
-        {/* Bento grid */}
-        <div className="grid grid-cols-12 gap-3 auto-rows-[260px]">
-          {PROJECTS.map((project, i) => (
-            <motion.div
-              key={project.id}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: i * 0.08 }}
-              className={`${project.accent} group relative overflow-hidden card`}
-            >
-              {/* Background gradient */}
-              <div className={`absolute inset-0 bg-gradient-to-br ${project.imageBg} opacity-80`} />
-
-              {/* Decorative grid lines */}
-              <div className="absolute inset-0 opacity-[0.03]"
-                style={{
-                  backgroundImage: "linear-gradient(rgba(255,255,255,1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,1) 1px, transparent 1px)",
-                  backgroundSize: "40px 40px"
-                }}
-              />
-
-              {/* Tech stack overlay on hover */}
-              <div className="absolute inset-0 bg-black/90 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center p-6 z-20">
-                <div className="text-center">
-                  <p className="font-mono-label text-[10px] tracking-[0.2em] uppercase text-zinc-500 mb-3">Tech Stack</p>
-                  <div className="flex flex-wrap justify-center gap-2">
-                    {project.stack.map((tech) => (
-                      <span
-                        key={tech}
-                        className="font-mono-label text-[10px] px-2.5 py-1 border border-zinc-700 text-zinc-300"
-                      >
-                        {tech}
-                      </span>
-                    ))}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {PROJECTS.map((project) => {
+            const Icon = project.icon;
+            return (
+              <div
+                key={project.id}
+                className="group glass rounded-sm p-6 flex flex-col gap-4 hover:border-zinc-700 transition-all duration-300"
+              >
+                {/* Header */}
+                <div className="flex items-start justify-between">
+                  <div className="flex items-center gap-3">
+                    <div className="w-9 h-9 rounded-sm bg-zinc-800 flex items-center justify-center group-hover:bg-zinc-700 transition-colors">
+                      <Icon size={16} className="text-zinc-400" />
+                    </div>
+                    <div>
+                      <p className="text-[10px] text-zinc-600 tracking-widest uppercase">
+                        {project.id} — {project.category}
+                      </p>
+                      <h3 className="text-base font-bold text-zinc-100">
+                        {project.name}
+                      </h3>
+                    </div>
                   </div>
-                  {project.demo && (
+                  {project.demo ? (
                     <a
                       href={project.demo}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 mt-5 font-mono-label text-[10px] tracking-widest uppercase text-zinc-400 hover:text-white border border-zinc-700 px-4 py-2 transition-colors"
+                      className="flex-shrink-0 w-8 h-8 flex items-center justify-center rounded-sm border border-zinc-700 text-zinc-500 hover:border-zinc-500 hover:text-zinc-300 transition-all"
+                      aria-label={`View ${project.name} demo`}
                     >
-                      View Live <ExternalLink size={10} />
+                      <ExternalLink size={13} />
                     </a>
-                  )}
-                </div>
-              </div>
-
-              {/* Content */}
-              <div className="absolute inset-0 p-6 flex flex-col justify-between z-10">
-                <div className="flex items-start justify-between">
-                  <span className="font-mono-label text-[9px] tracking-[0.25em] uppercase text-zinc-600">
-                    {project.id} — {project.category}
-                  </span>
-                  {!project.demo && (
-                    <span className="font-mono-label text-[9px] px-2 py-0.5 border border-zinc-800 text-zinc-700">
+                  ) : (
+                    <span className="flex-shrink-0 px-2 py-1 text-[10px] tracking-widest uppercase text-zinc-600 border border-zinc-800 rounded-sm">
                       Private
                     </span>
                   )}
                 </div>
 
-                <div>
-                  <h3 className="text-2xl font-bold text-zinc-100 tracking-tight leading-none mb-1">
-                    {project.name}
-                  </h3>
-                  <p className="font-mono-label text-[10px] text-zinc-500 mb-3">{project.tagline}</p>
-                  <p className="text-xs text-zinc-600 leading-relaxed max-w-sm">
-                    {project.description}
-                  </p>
+                {/* Tagline */}
+                <p className="text-xs font-medium text-zinc-400">
+                  {project.tagline}
+                </p>
+
+                {/* Description */}
+                <p className="text-xs text-zinc-500 leading-relaxed flex-1">
+                  {project.description}
+                </p>
+
+                {/* Tech stack */}
+                <div className="flex flex-wrap gap-1.5 pt-2 border-t border-zinc-800/80">
+                  {project.stack.map((tech) => (
+                    <span
+                      key={tech}
+                      className="text-[10px] px-2 py-0.5 rounded-sm bg-zinc-800/60 text-zinc-500 border border-zinc-800"
+                    >
+                      {tech}
+                    </span>
+                  ))}
                 </div>
               </div>
-            </motion.div>
-          ))}
+            );
+          })}
         </div>
       </div>
     </section>

@@ -23,64 +23,73 @@ export default function Navbar() {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-        scrolled ? "bg-black/70 backdrop-blur-xl border-b border-zinc-900" : "bg-transparent"
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        scrolled
+          ? "bg-zinc-950/80 backdrop-blur-md border-b border-zinc-800/60"
+          : "bg-transparent"
       }`}
     >
-      <div className="max-w-6xl mx-auto px-6 h-14 flex items-center justify-between">
-        {/* Wordmark */}
-        <a href="#" className="font-mono-label text-xs tracking-[0.3em] text-zinc-500 hover:text-zinc-300 transition-colors uppercase">
-          NT<span className="text-zinc-700">_</span>
+      <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
+        {/* Logo / Wordmark */}
+        <a
+          href="#"
+          className="text-sm font-semibold tracking-widest text-zinc-100 uppercase hover:text-white transition-colors"
+        >
+          NT<span className="text-zinc-500">.</span>
         </a>
 
-        {/* Desktop nav */}
+        {/* Desktop Nav */}
         <nav className="hidden md:flex items-center gap-8">
           {NAV_LINKS.map((link) => (
             <a
               key={link.href}
               href={link.href}
-              className="font-mono-label text-[11px] tracking-[0.2em] uppercase text-zinc-600 hover:text-zinc-300 transition-colors"
+              className="text-xs font-medium tracking-widest uppercase text-zinc-400 hover:text-zinc-100 transition-colors"
             >
               {link.label}
             </a>
           ))}
         </nav>
 
-        {/* Resume CTA */}
+        {/* Desktop CTA */}
         <a
           href="/resume.pdf"
           download
-          className="hidden md:flex items-center gap-2 font-mono-label text-[10px] tracking-[0.2em] uppercase px-3 py-1.5 border border-zinc-800 text-zinc-500 hover:border-zinc-600 hover:text-zinc-300 transition-all"
+          className="hidden md:flex items-center gap-2 text-xs font-medium tracking-widest uppercase px-4 py-2 border border-zinc-700 rounded-sm text-zinc-300 hover:border-zinc-400 hover:text-white transition-all"
         >
-          Resume.pdf
+          Resume
         </a>
 
-        {/* Mobile toggle */}
+        {/* Mobile Menu Toggle */}
         <button
           onClick={() => setMenuOpen(!menuOpen)}
-          className="md:hidden text-zinc-500 hover:text-zinc-300 transition-colors"
+          className="md:hidden text-zinc-400 hover:text-white transition-colors"
           aria-label="Toggle menu"
         >
-          {menuOpen ? <X size={18} /> : <Menu size={18} />}
+          {menuOpen ? <X size={20} /> : <Menu size={20} />}
         </button>
       </div>
 
-      {/* Mobile menu */}
+      {/* Mobile Dropdown */}
       {menuOpen && (
-        <div className="md:hidden bg-black/95 backdrop-blur-xl border-b border-zinc-900">
-          <nav className="max-w-6xl mx-auto px-6 py-5 flex flex-col gap-4">
+        <div className="md:hidden bg-zinc-950/95 backdrop-blur-md border-b border-zinc-800/60">
+          <nav className="max-w-6xl mx-auto px-6 py-4 flex flex-col gap-4">
             {NAV_LINKS.map((link) => (
               <a
                 key={link.href}
                 href={link.href}
                 onClick={() => setMenuOpen(false)}
-                className="font-mono-label text-xs tracking-widest uppercase text-zinc-500 hover:text-zinc-200 transition-colors"
+                className="text-sm font-medium text-zinc-400 hover:text-white transition-colors py-1"
               >
                 {link.label}
               </a>
             ))}
-            <a href="/resume.pdf" download className="font-mono-label text-xs tracking-widest uppercase text-zinc-600">
-              Resume.pdf
+            <a
+              href="/resume.pdf"
+              download
+              className="text-sm font-medium text-zinc-400 hover:text-white transition-colors py-1"
+            >
+              Download Resume
             </a>
           </nav>
         </div>
