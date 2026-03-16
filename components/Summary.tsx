@@ -11,7 +11,7 @@ const HIGHLIGHTS = [
   },
   {
     icon: Users,
-    title: "Team Lead & Bridge Engineer",
+    title: "Engineer & Team Lead",
     description:
       "Leading cross-functional engineering teams at Akatsuki AI Technologies, bridging Japanese client communication with technical delivery.",
   },

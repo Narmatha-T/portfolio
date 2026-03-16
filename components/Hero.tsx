@@ -1,101 +1,180 @@
 "use client";
 
+import Image from "next/image";
 import { ArrowDown, Download, ExternalLink, MapPin } from "lucide-react";
 
 export default function Hero() {
   return (
-    <section
-      id="hero"
-      className="relative min-h-screen flex flex-col justify-center section-padding pt-32"
-    >
-      {/* Top ambient glow */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[400px] bg-white/[0.02] rounded-full blur-3xl pointer-events-none" />
+    <>
+      <style>{`
+        @keyframes blink {
+          0%, 100% { opacity: 1; }
+          50%       { opacity: 0; }
+        }
+        @keyframes scanDown {
+          0%   { top: 0%;   opacity: 0.9; }
+          85%  { opacity: 0.6; }
+          100% { top: 100%; opacity: 0;   }
+        }
+        @keyframes cornerPulse {
+          0%, 100% { opacity: 0.25; }
+          50%      { opacity: 0.9;  }
+        }
+        @keyframes labelFade {
+          0%, 100% { opacity: 0.4; }
+          50%      { opacity: 0.9; }
+        }
+      `}</style>
 
-      <div className="relative z-10 max-w-4xl mx-auto w-full">
-        {/* Location badge */}
-        <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-zinc-800 bg-zinc-900/60 backdrop-blur-sm mb-8">
-          <MapPin size={12} className="text-zinc-500" />
-          <span className="text-xs font-medium text-zinc-400 tracking-widest uppercase">
-            Tokyo, Japan
-          </span>
-          <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse ml-1" />
-        </div>
-
-        {/* Name */}
-        <p className="text-sm font-medium tracking-[0.3em] uppercase text-zinc-500 mb-4">
-          Narmatha Thiyagarajan
-        </p>
-
-        {/* Headline */}
-        <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight text-zinc-100 leading-[1.1] mb-6">
-          Building responsibly,{" "}
-          <span className="text-zinc-500">delivering</span>
-          <br />
-          end-to-end AI solutions.
-        </h1>
-
-        {/* Sub-headline */}
-        <p className="text-base md:text-lg text-zinc-400 max-w-2xl leading-relaxed mb-10 font-light">
-          AI Engineer specialized in{" "}
-          <span className="text-zinc-300 font-medium">Computer Vision</span>,{" "}
-          <span className="text-zinc-300 font-medium">LLMs</span>, and{" "}
-          <span className="text-zinc-300 font-medium">
-            Scalable Backend Systems
-          </span>
-          . Currently Team Lead &amp; Bridge Engineer at{" "}
-          <span className="text-zinc-300 font-medium">
-            Akatsuki AI Technologies
-          </span>
-          .
-        </p>
-
-        {/* CTA Buttons */}
-        <div className="flex flex-wrap gap-4">
-          <a
-            href="#projects"
-            className="group inline-flex items-center gap-2 px-6 py-3 bg-white text-zinc-900 text-sm font-semibold rounded-sm hover:bg-zinc-200 transition-all duration-200"
-          >
-            View Projects
-            <ExternalLink
-              size={14}
-              className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform"
-            />
-          </a>
-          <a
-            href="/resume.pdf"
-            download
-            className="group inline-flex items-center gap-2 px-6 py-3 border border-zinc-700 text-zinc-300 text-sm font-medium rounded-sm hover:border-zinc-500 hover:text-white transition-all duration-200"
-          >
-            <Download size={14} />
-            Download Resume
-          </a>
-        </div>
-
-        {/* Stats row */}
-        <div className="flex flex-wrap gap-8 mt-16 pt-8 border-t border-zinc-800/60">
-          {[
-            { value: "3+", label: "Years in AI" },
-            { value: "8+", label: "Production Systems" },
-            { value: "JLPT N3", label: "Japanese Proficiency" },
-          ].map((stat) => (
-            <div key={stat.label}>
-              <p className="text-2xl font-bold text-zinc-100">{stat.value}</p>
-              <p className="text-xs text-zinc-500 tracking-widest uppercase mt-0.5">
-                {stat.label}
-              </p>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      {/* Scroll indicator */}
-      <a
-        href="#about"
-        className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-zinc-600 hover:text-zinc-400 transition-colors"
+      <section
+        id="hero"
+        className="relative min-h-screen flex flex-col justify-center section-padding pt-32"
       >
-        <span className="text-[10px] tracking-widest uppercase">Scroll</span>
-        <ArrowDown size={14} className="animate-bounce" />
-      </a>
-    </section>
+        {/* Ambient glow */}
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[400px] bg-green-500/[0.03] rounded-full blur-3xl pointer-events-none" />
+
+        <div className="relative z-10 max-w-6xl mx-auto w-full flex flex-col-reverse lg:flex-row items-center justify-between gap-16">
+
+          {/* ── Left: Text ── */}
+          <div className="flex-1 w-full">
+
+            {/* Location badge */}
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-zinc-800 bg-zinc-900/60 backdrop-blur-sm mb-8">
+              <MapPin size={12} className="text-zinc-500" />
+              <span className="text-xs font-medium text-zinc-400 tracking-widest uppercase">
+                Tokyo, Japan
+              </span>
+              <span className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse ml-1" />
+            </div>
+
+            {/* Name — monospace + blinking cursor */}
+            <p className="text-sm font-mono tracking-[0.25em] uppercase text-green-400/80 mb-4">
+              Narmatha Thiyagarajan
+              <span
+                className="ml-1 inline-block w-[0.55em] h-[1em] bg-green-400/70 align-middle"
+                style={{ animation: "blink 1s step-end infinite" }}
+              />
+            </p>
+
+            {/* Headline */}
+            <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight text-zinc-100 leading-[1.1] mb-6">
+              Building responsibly,{" "}
+              <span className="text-zinc-500">delivering</span>
+              <br />
+              end-to-end AI solutions.
+            </h1>
+
+            {/* Sub-headline */}
+            <p className="text-base md:text-lg text-zinc-400 max-w-2xl leading-relaxed mb-10 font-light">
+              AI Engineer specialized in{" "}
+              <span className="text-green-400/80 font-medium">Computer Vision</span>,{" "}
+              <span className="text-green-400/80 font-medium">LLMs</span>, and{" "}
+              <span className="text-green-400/80 font-medium">
+                Scalable Backend Systems
+              </span>
+              . Currently Engineer &amp; Team Lead at{" "}
+              <span className="text-zinc-300 font-medium">
+                Akatsuki AI Technologies
+              </span>
+              .
+            </p>
+
+            {/* CTA Buttons — primary is green-tinted */}
+            <div className="flex flex-wrap gap-4">
+              <a
+                href="#projects"
+                className="group inline-flex items-center gap-2 px-6 py-3 bg-green-400 text-zinc-900 text-sm font-semibold rounded-sm hover:bg-green-300 transition-all duration-200"
+              >
+                View Projects
+                <ExternalLink
+                  size={14}
+                  className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform"
+                />
+              </a>
+              <a
+                href="/resume.pdf"
+                download
+                className="group inline-flex items-center gap-2 px-6 py-3 border border-zinc-700 text-zinc-300 text-sm font-medium rounded-sm hover:border-green-400/50 hover:text-white transition-all duration-200"
+              >
+                <Download size={14} />
+                Download Resume
+              </a>
+            </div>
+
+            {/* Stats */}
+            <div className="flex flex-wrap gap-8 mt-16 pt-8 border-t border-zinc-800/60">
+              {[
+                { value: "3+", label: "Years in AI" },
+                { value: "8+", label: "Production Systems" },
+                { value: "JLPT N3", label: "Japanese Proficiency" },
+              ].map((stat) => (
+                <div key={stat.label}>
+                  <p className="text-2xl font-bold text-zinc-100">{stat.value}</p>
+                  <p className="text-xs text-zinc-500 tracking-widest uppercase mt-0.5">
+                    {stat.label}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* ── Right: Profile image inside CV detection box ── */}
+          <div className="relative w-64 h-64 md:w-80 md:h-80 lg:w-[450px] lg:h-[450px] shrink-0">
+
+            {/* Corner brackets — pulsing staggered */}
+            <span
+              className="absolute top-0 left-0 w-10 h-10 border-t-2 border-l-2 border-green-400/70 z-20"
+              style={{ animation: "cornerPulse 2.4s ease-in-out infinite 0s" }}
+            />
+            <span
+              className="absolute top-0 right-0 w-10 h-10 border-t-2 border-r-2 border-green-400/70 z-20"
+              style={{ animation: "cornerPulse 2.4s ease-in-out infinite 0.6s" }}
+            />
+            <span
+              className="absolute bottom-0 left-0 w-10 h-10 border-b-2 border-l-2 border-green-400/70 z-20"
+              style={{ animation: "cornerPulse 2.4s ease-in-out infinite 1.2s" }}
+            />
+            <span
+              className="absolute bottom-0 right-0 w-10 h-10 border-b-2 border-r-2 border-green-400/70 z-20"
+              style={{ animation: "cornerPulse 2.4s ease-in-out infinite 1.8s" }}
+            />
+
+            {/* Top label */}
+            <span
+              className="absolute -top-6 left-0 z-20 font-mono text-[9px] tracking-[0.2em] text-green-400/60 uppercase"
+              style={{ animation: "labelFade 2.4s ease-in-out infinite" }}
+            >
+              SUBJECT_DETECTED ✓
+            </span>
+            {/* Bottom label */}
+            <span
+              className="absolute -bottom-6 right-0 z-20 font-mono text-[9px] tracking-[0.2em] text-green-400/60 uppercase"
+              style={{ animation: "labelFade 2.4s ease-in-out infinite 1.2s" }}
+            >
+              CONF: 99.8%
+            </span>
+
+            {/* Scan line sweeping inside a clipped circle */}
+            <div className="absolute inset-0 rounded-full overflow-hidden z-10 pointer-events-none">
+              <div
+                className="absolute left-0 right-0 h-px bg-gradient-to-r from-transparent via-green-400/50 to-transparent"
+                style={{ top: 0, animation: "scanDown 3s linear infinite" }}
+              />
+            </div>
+
+            {/* Image */}
+            <div className="relative w-full h-full rounded-full border border-zinc-800 bg-zinc-900/40 overflow-hidden">
+              <Image
+                src="/Profile-picture-transparent.png"
+                alt="Narmatha Thiyagarajan"
+                fill
+                className="object-cover object-center translate-y-4 lg:translate-y-8"
+                priority
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+    </>
   );
 }

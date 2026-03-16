@@ -25,17 +25,25 @@ export default function Navbar() {
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         scrolled
-          ? "bg-zinc-950/80 backdrop-blur-md border-b border-zinc-800/60"
-          : "bg-transparent"
+          ? "bg-zinc-950 backdrop-blur-md border-b border-zinc-800/60"
+          : "bg-zinc-950"
       }`}
     >
       <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
-        {/* Logo / Wordmark */}
+        {/* Logo / Wordmark — Kolam */}
         <a
           href="#"
-          className="text-sm font-semibold tracking-widest text-zinc-100 uppercase hover:text-white transition-colors"
+          className="group flex items-center md:-ml-4 hover:opacity-80 transition-opacity"
+          aria-label="Home"
         >
-          NT<span className="text-zinc-500">.</span>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/logo_black.png"
+            alt="Narmatha Thiyagarajan — Kolam logo"
+            width={60}
+            height={60}
+            className="object-contain"
+          />
         </a>
 
         {/* Desktop Nav */}
@@ -44,7 +52,7 @@ export default function Navbar() {
             <a
               key={link.href}
               href={link.href}
-              className="text-xs font-medium tracking-widest uppercase text-zinc-400 hover:text-zinc-100 transition-colors"
+              className="text-sm font-medium tracking-widest uppercase text-zinc-400 hover:text-zinc-100 transition-colors"
             >
               {link.label}
             </a>
@@ -55,7 +63,7 @@ export default function Navbar() {
         <a
           href="/resume.pdf"
           download
-          className="hidden md:flex items-center gap-2 text-xs font-medium tracking-widest uppercase px-4 py-2 border border-zinc-700 rounded-sm text-zinc-300 hover:border-zinc-400 hover:text-white transition-all"
+          className="hidden md:flex items-center gap-2 text-sm font-medium tracking-widest uppercase px-4 py-2 border border-zinc-700 rounded-sm text-zinc-300 hover:border-zinc-400 hover:text-white transition-all"
         >
           Resume
         </a>

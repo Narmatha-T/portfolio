@@ -21,9 +21,14 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
           {/* Brand */}
           <div>
-            <p className="text-sm font-semibold tracking-widest uppercase text-zinc-100 mb-3">
-              NT<span className="text-zinc-500">.</span>
-            </p>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/logo_black.png"
+              alt="Narmatha Thiyagarajan — Kolam logo"
+              width={48}
+              height={48}
+              className="object-contain mb-3"
+            />
             <p className="text-xs text-zinc-500 leading-relaxed max-w-[220px]">
               Building responsibly, delivering end-to-end AI solutions.
             </p>

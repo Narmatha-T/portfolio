@@ -3,7 +3,7 @@
 const EXPERIENCE = [
   {
     period: "2025 — Present",
-    role: "Team Lead & Bridge Engineer",
+    role: "Engineer",
     company: "Akatsuki AI Technologies",
     location: "Tokyo, Japan",
     current: true,
