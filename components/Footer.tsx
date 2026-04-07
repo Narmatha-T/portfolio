@@ -1,56 +1,54 @@
 "use client";
 
 import { Github, Linkedin, Mail, MapPin } from "lucide-react";
-
-const NAV_LINKS = [
-  { label: "About", href: "#about" },
-  { label: "Skills", href: "#skills" },
-  { label: "Projects", href: "#projects" },
-  { label: "Experience", href: "#experience" },
-];
+import { FOOTER_NAV_LINKS } from "@/lib/data";
+import Logo from "@/components/Logo";
+import { useLang } from "@/context/LanguageContext";
+import { i18n } from "@/lib/i18n";
 
 export default function Footer() {
   const year = new Date().getFullYear();
+  const { lang } = useLang();
+  const t = i18n[lang].footer;
+  const navLabels: Record<string, string> = {
+    About: i18n[lang].nav.about,
+    Skills: i18n[lang].nav.skills,
+    Projects: i18n[lang].nav.projects,
+    Experience: i18n[lang].nav.experience,
+  };
 
   return (
     <footer
       id="contact"
-      className="border-t border-zinc-800/60 section-padding"
+      className="border-t border-zinc-200/60 dark:border-zinc-800/60 section-padding"
     >
       <div className="max-w-6xl mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
           {/* Brand */}
           <div>
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src="/logo_black.png"
-              alt="Narmatha Thiyagarajan — Kolam logo"
-              width={48}
-              height={48}
-              className="object-contain mb-3"
-            />
+            <Logo className="text-lg text-zinc-900 dark:text-white mb-3" />
             <p className="text-xs text-zinc-500 leading-relaxed max-w-[220px]">
-              Building responsibly, delivering end-to-end AI solutions.
+              {t.tagline}
             </p>
             <div className="flex items-center gap-1.5 mt-4">
-              <MapPin size={11} className="text-zinc-600" />
-              <span className="text-xs text-zinc-600">Tokyo, Japan</span>
+              <MapPin size={11} className="text-zinc-400 dark:text-zinc-600" />
+              <span className="text-xs text-zinc-400 dark:text-zinc-600">{t.location}</span>
             </div>
           </div>
 
           {/* Navigation */}
           <div>
-            <p className="text-[10px] font-medium tracking-[0.25em] uppercase text-zinc-600 mb-4">
-              Navigation
+            <p className="text-[10px] font-medium tracking-[0.25em] uppercase text-zinc-400 dark:text-zinc-600 mb-4">
+              {t.navHeading}
             </p>
             <nav className="flex flex-col gap-2">
-              {NAV_LINKS.map((link) => (
+              {FOOTER_NAV_LINKS.map((link) => (
                 <a
                   key={link.href}
                   href={link.href}
-                  className="text-xs text-zinc-500 hover:text-zinc-300 transition-colors"
+                  className="text-xs text-zinc-500 hover:text-zinc-700 dark:hover:text-zinc-300 transition-colors"
                 >
-                  {link.label}
+                  {navLabels[link.label] ?? link.label}
                 </a>
               ))}
             </nav>
@@ -58,15 +56,15 @@ export default function Footer() {
 
           {/* Contact */}
           <div>
-            <p className="text-[10px] font-medium tracking-[0.25em] uppercase text-zinc-600 mb-4">
-              Get in Touch
+            <p className="text-[10px] font-medium tracking-[0.25em] uppercase text-zinc-400 dark:text-zinc-600 mb-4">
+              {t.contactHeading}
             </p>
             <div className="flex items-center gap-3">
               <a
                 href="https://mail.google.com/mail/?view=cm&to=thiyagarajannarmatha@gmail.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-9 h-9 rounded-full bg-zinc-800 border border-zinc-700 flex items-center justify-center text-zinc-400 hover:text-zinc-200 hover:border-zinc-500 transition-all"
+                className="w-9 h-9 rounded-full bg-zinc-100 dark:bg-zinc-800 border border-zinc-300 dark:border-zinc-700 flex items-center justify-center text-zinc-500 dark:text-zinc-400 hover:text-zinc-800 dark:hover:text-zinc-200 hover:border-zinc-400 dark:hover:border-zinc-500 transition-all"
                 aria-label="Email"
               >
                 <Mail size={15} />
@@ -75,7 +73,7 @@ export default function Footer() {
                 href="https://www.linkedin.com/in/narmatha-t/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-9 h-9 rounded-full bg-zinc-800 border border-zinc-700 flex items-center justify-center text-zinc-400 hover:text-zinc-200 hover:border-zinc-500 transition-all"
+                className="w-9 h-9 rounded-full bg-zinc-100 dark:bg-zinc-800 border border-zinc-300 dark:border-zinc-700 flex items-center justify-center text-zinc-500 dark:text-zinc-400 hover:text-zinc-800 dark:hover:text-zinc-200 hover:border-zinc-400 dark:hover:border-zinc-500 transition-all"
                 aria-label="LinkedIn"
               >
                 <Linkedin size={15} />
@@ -84,7 +82,7 @@ export default function Footer() {
                 href="https://github.com/Narmatha-T"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-9 h-9 rounded-full bg-zinc-800 border border-zinc-700 flex items-center justify-center text-zinc-400 hover:text-zinc-200 hover:border-zinc-500 transition-all"
+                className="w-9 h-9 rounded-full bg-zinc-100 dark:bg-zinc-800 border border-zinc-300 dark:border-zinc-700 flex items-center justify-center text-zinc-500 dark:text-zinc-400 hover:text-zinc-800 dark:hover:text-zinc-200 hover:border-zinc-400 dark:hover:border-zinc-500 transition-all"
                 aria-label="GitHub"
               >
                 <Github size={15} />
@@ -93,7 +91,7 @@ export default function Footer() {
                 href="https://wa.me/8107091710377"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-9 h-9 rounded-full bg-zinc-800 border border-zinc-700 flex items-center justify-center text-zinc-400 hover:text-zinc-200 hover:border-zinc-500 transition-all"
+                className="w-9 h-9 rounded-full bg-zinc-100 dark:bg-zinc-800 border border-zinc-300 dark:border-zinc-700 flex items-center justify-center text-zinc-500 dark:text-zinc-400 hover:text-zinc-800 dark:hover:text-zinc-200 hover:border-zinc-400 dark:hover:border-zinc-500 transition-all"
                 aria-label="WhatsApp"
               >
                 <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
@@ -105,12 +103,12 @@ export default function Footer() {
         </div>
 
         {/* Bottom bar */}
-        <div className="pt-6 border-t border-zinc-800/60 flex flex-col sm:flex-row items-center justify-between gap-3">
-          <p className="text-[11px] text-zinc-600">
-            &copy; {year} Narmatha Thiyagarajan. All rights reserved.
+        <div className="pt-6 border-t border-zinc-200/60 dark:border-zinc-800/60 flex flex-col sm:flex-row items-center justify-between gap-3">
+          <p className="text-[11px] text-zinc-400 dark:text-zinc-600">
+            {t.copyright(year)}
           </p>
-          <p className="text-[11px] text-zinc-700">
-            Built with Next.js &amp; Tailwind CSS
+          <p className="text-[11px] text-zinc-300 dark:text-zinc-700">
+            {t.builtWith}
           </p>
         </div>
       </div>

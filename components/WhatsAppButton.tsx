@@ -1,7 +1,5 @@
 "use client";
 
-import { MessageCircle } from "lucide-react";
-
 const WHATSAPP_NUMBER = "8107091710377";
 const WHATSAPP_MESSAGE = encodeURIComponent(
   "Hi Narmatha! I came across your portfolio and would love to connect."
@@ -20,12 +18,15 @@ export default function WhatsAppButton() {
         group
         flex items-center gap-2
         px-3 py-3 sm:px-4
-        bg-zinc-900 border border-zinc-700
+        bg-white dark:bg-zinc-900
+        border border-zinc-300 dark:border-zinc-700
         rounded-full
-        text-zinc-300
-        hover:bg-zinc-800 hover:border-zinc-500 hover:text-white
+        text-zinc-700 dark:text-zinc-300
+        hover:bg-zinc-100 dark:hover:bg-zinc-800
+        hover:border-zinc-400 dark:hover:border-zinc-500
+        hover:text-zinc-900 dark:hover:text-white
         transition-all duration-300
-        shadow-lg shadow-black/30
+        shadow-lg shadow-black/10 dark:shadow-black/30
       "
     >
       {/* WhatsApp SVG icon */}

@@ -9,7 +9,7 @@ import WhatsAppButton from "@/components/WhatsAppButton";
 
 export default function Home() {
   return (
-    <main className="relative min-h-screen bg-zinc-950 overflow-x-hidden">
+    <main className="relative min-h-screen bg-white dark:bg-zinc-950 overflow-x-hidden">
       {/* Ambient grid background */}
       <div className="fixed inset-0 grid-bg opacity-50 pointer-events-none" />
 
