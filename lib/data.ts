@@ -263,7 +263,7 @@ export type ExperienceEntry = {
 export const EXPERIENCE: ExperienceEntry[] = [
   {
     period: "Nov 2025 — Present",
-    role: "Team Lead & Bridge Engineer",
+    role: "Engineer",
     company: "Akatsuki AI Technologies",
     location: "Tokyo, Japan",
     current: true,
@@ -281,12 +281,11 @@ export const EXPERIENCE: ExperienceEntry[] = [
     location: "Tokyo, Japan",
     current: false,
     highlights: [
-      "Built and deployed 8+ production AI systems across telecommunications, recycling, and public safety sectors over 3 years.",
-      "MEGURU: Achieved 12.5× speed improvement on number plate detection + FaceNet512 face authentication system deployed for enterprise security.",
-      "Wall deterioration classifier: 90%+ accuracy using ConvNeXt / Swin-Transformer ensemble for infrastructure inspection.",
-      "PET bottle recycling classifier (YOLOX) and MobileSAM warehouse background separation system.",
-      "Kimono texture generation using pix2pix + TextureGAN GANs; crowd monitoring platform with COCO-SSD and LINE login.",
-      "Engineered high-concurrency backend systems (Django, Redis, Celery) handling thousands of simultaneous users; implemented browser-side AI inference via TensorFlow.js.",
+      "Built and deployed 8+ production AI systems across telecommunications, recycling, and public safety — from initial PoC to live deployment — over a 3-year tenure.",
+      "Re-engineered the MEGURU security pipeline by replacing legacy models with a YuNet + MediaPipe hybrid, achieving a 12.5× improvement in face detection speed for real-time mobile use.",
+      "Built a wall deterioration classifier for Japan's Building Research Institute (BRI) under the Cabinet Office's SIP program, reaching 90%+ accuracy with a ConvNeXt / Swin-Transformer ensemble.",
+      "Designed YOLOX-based PET bottle sorting for an industrial recycling line and MobileSAM-driven cargo tracking for a 27,000-ton cold-storage logistics hub.",
+      "Conducted PoC research on Kimono texture synthesis using pix2pix + TextureGAN GANs; built a zero-server-cost crowd monitoring platform using TensorFlow.js and COCO-SSD.",
     ],
   },
 ];

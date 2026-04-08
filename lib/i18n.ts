@@ -41,7 +41,7 @@ const en = {
     p1suffix:
       " of experience and 8+ shipped production systems, I specialize in bridging the gap between advanced AI research and industrial-grade production\u2014from automating Japan\u2019s national infrastructure inspections (SIP) to scaling high-concurrency ticketing platforms for global artists.",
     p2: "I bridge the gap between AI research and production by handling the full stack: model optimization, scalable backend engineering (Django/Redis), and cloud deployment. I specialize in delivering high-performance results, such as 12.5\u00d7 faster inference and robust architectures that support tens of thousands of simultaneous users.",
-    p3: "Currently working with a global team of 4 IIT interns at Akatsuki AI Technologies, bridging Japanese enterprise clients with technical delivery. Based in Tokyo, I operate daily in a bilingual environment, leveraging Native English and Business Japanese (JLPT N3/N2).",
+    p3: "Currently working with a global team of IIT interns at Akatsuki AI Technologies, bridging Japanese enterprise clients with technical delivery. Based in Tokyo, I operate daily in a bilingual environment, leveraging Native English and Business Japanese (JLPT N3/N2).",
   },
   skills: {
     label: "01 — Technical Skills",
@@ -72,7 +72,7 @@ const en = {
     {
       title: "AI Systems Architect",
       description:
-        "Designed and deployed 8+ production-grade AI systems across telecommunications, waste recycling, and public safety sectors — spanning CV pipelines, LLM/RAG applications, and edge inference.",
+        "Architected and deployed 8+ production-grade AI ecosystems across the telecommunications, recycling, and public safety sectors. I specialize in the full-stack delivery of high-accuracy CV pipelines, LLM/RAG integrations, and hardware-optimized edge inference.",
     },
     {
       title: "Team Lead & Bridge Engineer",
@@ -82,24 +82,23 @@ const en = {
     {
       title: "Multilingual Engineer",
       description:
-        "Operates fluently in English (native) and Japanese (business-level, JLPT N3, targeting N2) — enabling direct collaboration with Japanese-market clients and stakeholders.",
+        "Operating fluently in Native English and Business Japanese (JLPT N3/N2). I bridge the gap between global technical innovation and clients expectations, facilitating direct collaboration and localized project success.",
     },
   ] as TranslatedHighlight[],
   projectsData: {} as TranslatedProjectData,
   experienceHighlights: [
     [
-      "Leading a global team of 4 IIT engineers building production-grade computer vision and LLM/RAG systems, with all communication conducted in English.",
+      "Leading a global team of IIT engineers building production-grade SaaS systems, with all communication conducted in English.",
       "Architected the CRAYON white-label concert platform for major artists including Ado, supporting tens of thousands of concurrent attendees using Redis Lua scripts for atomic inventory management.",
-      "Acting as technical bridge between Japanese enterprise clients and the engineering team — owning requirements, architecture decisions, and delivery timelines.",
+      "Acting as technical bridge between CRAYON and the engineering team — owning requirements, architecture decisions, bug management, and delivery timelines.",
       "Driving UI/UX design in Figma and full-stack implementation across Django 5, AWS ECS/RDS/S3 infrastructure.",
     ],
     [
-      "Built and deployed 8+ production AI systems across telecommunications, recycling, and public safety sectors over 3 years.",
-      "MEGURU: Achieved 12.5\u00d7 speed improvement on number plate detection + FaceNet512 face authentication system deployed for enterprise security.",
-      "Wall deterioration classifier: 90%+ accuracy using ConvNeXt / Swin-Transformer ensemble for infrastructure inspection.",
-      "PET bottle recycling classifier (YOLOX) and MobileSAM warehouse background separation system.",
-      "Kimono texture generation using pix2pix + TextureGAN GANs; crowd monitoring platform with COCO-SSD and LINE login.",
-      "Engineered high-concurrency backend systems (Django, Redis, Celery) handling thousands of simultaneous users; implemented browser-side AI inference via TensorFlow.js.",
+      "Built and deployed 8+ production AI systems across telecommunications, recycling, and public safety — from initial PoC to live deployment — over a 3-year tenure.",
+      "Re-engineered the MEGURU security pipeline by replacing legacy models with a YuNet + MediaPipe hybrid, achieving a 12.5× improvement in face detection speed for real-time mobile use.",
+      "Built a wall deterioration classifier for Japan's Building Research Institute (BRI) under the Cabinet Office's SIP program, reaching 90%+ accuracy with a ConvNeXt / Swin-Transformer ensemble.",
+      "Designed YOLOX-based PET bottle sorting for an industrial recycling line and MobileSAM-driven cargo tracking for a 27,000-ton cold-storage logistics hub.",
+      "Conducted PoC research on Kimono texture synthesis using pix2pix + TextureGAN GANs; built a zero-server-cost crowd monitoring platform using TensorFlow.js and COCO-SSD.",
     ],
   ] as string[][],
 };
