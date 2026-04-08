@@ -66,7 +66,6 @@ const en = {
     navHeading: "Navigation",
     contactHeading: "Get in Touch",
     copyright: (year: number) => `\u00a9 ${year} Narmatha Thiyagarajan. All rights reserved.`,
-    builtWith: "Built with Next.js \u0026 Tailwind CSS",
   },
   highlights: [
     {
@@ -164,7 +163,6 @@ const jp = {
     navHeading: "ナビゲーション",
     contactHeading: "お問い合わせ",
     copyright: (year: number) => `\u00a9 ${year} Narmatha Thiyagarajan. 無断複製禁止。`,
-    builtWith: "Next.js \u0026 Tailwind CSS で構築",
   },
   highlights: [
     {

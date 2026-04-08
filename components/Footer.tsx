@@ -103,12 +103,9 @@ export default function Footer() {
         </div>
 
         {/* Bottom bar */}
-        <div className="pt-6 border-t border-zinc-200/60 dark:border-zinc-800/60 flex flex-col sm:flex-row items-center justify-between gap-3">
+        <div className="pt-6 border-t border-zinc-200/60 dark:border-zinc-800/60 flex items-center justify-center">
           <p className="text-[11px] text-zinc-400 dark:text-zinc-600">
             {t.copyright(year)}
-          </p>
-          <p className="text-[11px] text-zinc-300 dark:text-zinc-700">
-            {t.builtWith}
           </p>
         </div>
       </div>
