@@ -1,21 +1,22 @@
-# Narmatha Thiyagarajan — AI Engineer Portfolio
+# Narmatha Thiyagarajan — Portfolio
 
-A professional, high-performance portfolio website built with **Next.js 14 (App Router)**, **Tailwind CSS**, and **Lucide React**.
+Personal portfolio website for Narmatha Thiyagarajan, AI Engineer based in Tokyo, Japan.
+
+Built with **Next.js**, **Tailwind CSS**, and **TypeScript** — with bilingual support (English / Japanese) and scroll-reveal animations.
 
 ## Tech Stack
 
-- **Framework:** Next.js 14 (App Router)
+- **Framework:** Next.js (App Router)
 - **Styling:** Tailwind CSS
+- **Language:** TypeScript
 - **Icons:** Lucide React
-- **Deployment:** Vercel-optimized
+- **i18n:** Custom context-based EN/JP translation
+- **Deployment:** Vercel
 
 ## Getting Started
 
 ```bash
-# Install dependencies
 npm install
-
-# Run development server
 npm run dev
 ```
 
@@ -30,37 +31,33 @@ portfolio/
 │   ├── layout.tsx        # Root layout with metadata
 │   └── page.tsx          # Main page composition
 ├── components/
-│   ├── Navbar.tsx         # Sticky navigation bar
+│   ├── Navbar.tsx         # Sticky navigation bar with language toggle
 │   ├── Hero.tsx           # Hero / above-the-fold section
-│   ├── Summary.tsx        # Professional summary
+│   ├── Summary.tsx        # Professional summary & highlights
 │   ├── Skills.tsx         # Technical skills grid
 │   ├── Projects.tsx       # Featured project cards
 │   ├── Experience.tsx     # Career timeline
 │   ├── Footer.tsx         # Footer with contact links
+│   ├── Logo.tsx           # Logo component
+│   ├── ScrollReveal.tsx   # Scroll-triggered reveal animations
 │   └── WhatsAppButton.tsx # Fixed WhatsApp floating button
-├── public/
-│   └── resume.pdf         # Place your resume PDF here
-├── tailwind.config.ts
-├── tsconfig.json
-└── next.config.ts
+├── context/
+│   └── LanguageContext.tsx # EN/JP language state provider
+├── lib/
+│   ├── data.ts            # All static content (projects, experience, skills)
+│   └── i18n.ts            # English and Japanese translations
+└── public/
+    └── resume.pdf         # Resume PDF
 ```
 
-## Adding Your Resume
+## Content
 
-Place your resume PDF file in the `public/` directory as `resume.pdf`. The "Download Resume" button and navbar link will automatically serve it.
+All portfolio content lives in `lib/data.ts` — projects, experience highlights, skills, and nav links. Translations are managed in `lib/i18n.ts`.
 
 ## Deployment
 
-This project is optimized for **Vercel**:
+Deployed on **Vercel**. To deploy your own fork:
 
 1. Push to a GitHub repository
-2. Import the repo at [vercel.com/new](https://vercel.com/new)
+2. Import at [vercel.com/new](https://vercel.com/new)
 3. Vercel auto-detects Next.js — click **Deploy**
-
-## WhatsApp Integration
-
-The floating button in the bottom-right corner links to WhatsApp chat with `+81 070-9171-0377`. To update the number, edit `components/WhatsAppButton.tsx`:
-
-```ts
-const WHATSAPP_NUMBER = "8107091710377";
-```
