@@ -129,9 +129,9 @@ export const PROJECTS: Project[] = [
     id: "01",
     icon: Music,
     name: "CRAYON",
-    tagline: "Multi-Tenant Concert Access Platform",
+    tagline: "Multi-Tenant Event Ticketing & Entry Management System",
     description:
-      "White-label ticketing and access management system for major artists including Ado, handling tens of thousands of concurrent attendees. Atomic inventory management via Redis Lua scripts, multi-tenant architecture per artist, and full UI/UX design in Figma.",
+      "White-label ticketing and venue entry management platform for high-traffic events and fanclubs, built for entertainment agencies including those representing Ado. A hierarchical tenant model (Tenant → Fanclub → Event → Slot) enforces granular access control, restricting specific ticket types to verified fanclub members only. The core feature is a two-phase Numbered Ticket (整理券) flow: a pre-registration/lottery phase handles initial demand with automatic winner selection and serial code distribution; remaining capacity then shifts automatically to a real-time FCFS pool. Redis Lua scripts guarantee atomic acquisition, eliminating double-booking races under high-concurrency spikes. The staff entry portal manages live venue flow via Auto and Manual call modes — tickets progress through a protected status machine (Waiting → Queued → Ready → Used/Expired) with immutable terminal states to prevent accidental overrides, and capacity can be adjusted dynamically based on real-time venue conditions.",
     stack: ["Django", "Redis", "Celery", "AWS", "Figma"],
     demo: null,
     category: "Backend Systems",
@@ -255,6 +255,7 @@ export type ExperienceEntry = {
   period: string;
   role: string;
   company: string;
+  url?: string;
   location: string;
   current: boolean;
   highlights: string[];
@@ -263,8 +264,9 @@ export type ExperienceEntry = {
 export const EXPERIENCE: ExperienceEntry[] = [
   {
     period: "Nov 2025 — Present",
-    role: "Engineer",
+    role: "AI Engineer and Team Lead",
     company: "Akatsuki AI Technologies",
+    url: "https://aktsk.jp/",
     location: "Tokyo, Japan",
     current: true,
     highlights: [
@@ -278,6 +280,7 @@ export const EXPERIENCE: ExperienceEntry[] = [
     period: "Sep 2022 — Oct 2025",
     role: "AI Engineer",
     company: "SOHGA Co., Ltd.",
+    url: "https://www.sohga.jp/",
     location: "Tokyo, Japan",
     current: false,
     highlights: [

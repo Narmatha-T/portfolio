@@ -1,5 +1,6 @@
 "use client";
 
+import { ExternalLink } from "lucide-react";
 import { EXPERIENCE } from "@/lib/data";
 import ScrollReveal from "@/components/ScrollReveal";
 import { useLang } from "@/context/LanguageContext";
@@ -54,14 +55,22 @@ export default function Experience() {
                     {/* Timeline dot */}
                     <div className="absolute left-0 top-1 w-2 h-2 rounded-full border border-zinc-300 dark:border-zinc-600 bg-white dark:bg-zinc-950 hidden sm:block -translate-x-[1px]" />
 
-                    <div className="glass rounded-sm p-6 hover:border-zinc-300 dark:hover:border-zinc-700 transition-all duration-300">
+                    <a
+                      href={exp.url ?? undefined}
+                      target={exp.url ? "_blank" : undefined}
+                      rel={exp.url ? "noopener noreferrer" : undefined}
+                      className={`glass rounded-sm p-6 block transition-all duration-300 hover:border-zinc-300 dark:hover:border-zinc-700${exp.url ? " cursor-pointer group/card" : ""}`}
+                    >
                       <div className="flex items-start justify-between mb-4">
                         <div>
                           <h3 className="text-base font-bold text-zinc-900 dark:text-zinc-100 mb-0.5">
                             {exp.role}
                           </h3>
-                          <p className="text-sm font-medium text-zinc-600 dark:text-zinc-400">
+                          <p className="text-sm font-medium text-zinc-600 dark:text-zinc-400 inline-flex items-center gap-1">
                             {exp.company}
+                            {exp.url && (
+                              <ExternalLink size={11} className="opacity-0 group-hover/card:opacity-60 transition-opacity" />
+                            )}
                           </p>
                           <p className="text-xs text-zinc-400 dark:text-zinc-600 mt-0.5">
                             {exp.location}
@@ -79,7 +88,7 @@ export default function Experience() {
                           </li>
                         ))}
                       </ul>
-                    </div>
+                    </a>
                   </div>
                 </div>
               </ScrollReveal>
