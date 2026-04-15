@@ -136,7 +136,7 @@ export default function Hero() {
           </div>
 
           {/* ── Right: Profile image inside CV detection box ── */}
-          <div className="relative w-64 h-64 md:w-80 md:h-80 lg:w-[450px] lg:h-[450px] shrink-0">
+          <div className="relative w-64 h-64 md:w-80 md:h-80 lg:w-[450px] lg:h-[450px] shrink-0 lg:-mt-40">
 
             {/* Corner brackets — pulsing staggered */}
             <span
@@ -161,7 +161,7 @@ export default function Hero() {
               className="absolute -top-6 left-0 z-20 font-mono text-[9px] tracking-[0.2em] text-green-600/60 dark:text-green-400/60 uppercase"
               style={{ animation: "labelFade 2.4s ease-in-out infinite" }}
             >
-              SUBJECT_DETECTED ✓
+              FACE_DETECTED ✓
             </span>
             {/* Bottom label */}
             <span
@@ -185,10 +185,11 @@ export default function Hero() {
                 <div className="absolute inset-0 img-skeleton" />
               )}
               <Image
-                src="/Profile-picture-transparent-2.png"
+                src="/photo-1.png"
                 alt="Narmatha Thiyagarajan"
                 fill
-                className={`object-cover object-top translate-y-4 transition-opacity duration-500 ${imageLoaded ? "opacity-100" : "opacity-0"}`}
+                style={{ objectPosition: '50% 45%' }}
+                className={`object-cover transition-opacity duration-500 ${imageLoaded ? "opacity-100" : "opacity-0"}`}
                 priority
                 onLoad={() => setImageLoaded(true)}
               />

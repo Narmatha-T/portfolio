@@ -7,10 +7,53 @@ import ScrollReveal from "@/components/ScrollReveal";
 import { useLang } from "@/context/LanguageContext";
 import { i18n } from "@/lib/i18n";
 
-const ANIM_IDS = new Set(["02", "03", "04", "05", "06", "07", "08", "09", "10"]);
+const ANIM_IDS = new Set(["01", "02", "03", "04", "05", "06", "07", "08", "09", "10"]);
 
 // ── Animation content (fills its container absolutely) ───────────────────────
 function ProjectAnimation({ id }: { id: string }) {
+  if (id === "01") return (
+    <div className="absolute inset-0 overflow-hidden">
+      <style>{`
+        @keyframes tk_card  { 0%{transform:translateX(-220px);opacity:0;} 8%{opacity:1;} 88%{opacity:1;} 96%{transform:translateX(220px);opacity:0;} 100%{transform:translateX(220px);opacity:0;} }
+        @keyframes tk_line  { 0%,40%{opacity:0.15;box-shadow:none;} 46%,56%{opacity:1;box-shadow:0 0 18px 5px rgba(168,85,247,0.7);} 64%,100%{opacity:0.15;box-shadow:none;} }
+        @keyframes tk_badge { 0%,55%{opacity:0;transform:translateY(6px);} 63%,84%{opacity:1;transform:translateY(0);} 92%,100%{opacity:0;} }
+      `}</style>
+
+      {/* Reader line — fixed center */}
+      <div className="absolute inset-y-4 left-1/2 -translate-x-1/2 w-[2px] rounded-full bg-purple-400"
+        style={{ animation: "tk_line 5s ease-in-out infinite" }} />
+
+      {/* Sliding ticket */}
+      <div className="absolute inset-0 flex items-center justify-center pointer-events-none"
+        style={{ animation: "tk_card 5s ease-in-out infinite" }}>
+        <div className="w-[110px] h-[58px] rounded-[4px] overflow-hidden border border-purple-400/50 shadow-lg flex-shrink-0"
+          style={{ background: 'linear-gradient(135deg, rgba(88,28,135,0.9) 0%, rgba(49,10,101,0.95) 100%)' }}>
+          <div className="px-2.5 pt-[6px]">
+            <div className="text-[8px] font-bold text-white font-mono tracking-widest">ADO LIVE 2025</div>
+            <div className="text-[6px] text-purple-300/80 font-mono mt-[1px]">TOKYO DOME</div>
+          </div>
+          <div className="px-2.5 pt-[4px] flex items-center justify-between">
+            <div>
+              <div className="text-[5px] text-purple-400/60 font-mono uppercase tracking-wider">Seat</div>
+              <div className="text-[11px] font-bold text-purple-100 font-mono leading-none">A-12</div>
+            </div>
+            <div className="flex gap-[1.5px] items-end">
+              {[3,5,2,4,5,2,3,4,2,5,3,4,2,5].map((h, i) => (
+                <div key={i} className="w-[1.5px] bg-purple-300/50 rounded-[0.5px]" style={{ height: `${h * 3}px` }} />
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Confirmation badge */}
+      <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex items-center gap-1.5 bg-purple-500/10 border border-purple-500/40 px-3 py-1 rounded-full opacity-0"
+        style={{ animation: "tk_badge 5s ease-in-out infinite" }}>
+        <span className="text-[10px] font-mono font-bold text-purple-400 dark:text-purple-300 tracking-wider">✓ ENTRY GRANTED</span>
+      </div>
+    </div>
+  );
+
   if (id === "02") return (
     <div className="absolute inset-0 overflow-hidden">
       <style>{`

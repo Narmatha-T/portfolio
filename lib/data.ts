@@ -133,8 +133,8 @@ export const PROJECTS: Project[] = [
     description:
       "White-label ticketing and venue entry management platform for high-traffic events and fanclubs, built for entertainment agencies including those representing Ado. A hierarchical tenant model (Tenant → Fanclub → Event → Slot) enforces granular access control, restricting specific ticket types to verified fanclub members only. The core feature is a two-phase Numbered Ticket (整理券) flow: a pre-registration/lottery phase handles initial demand with automatic winner selection and serial code distribution; remaining capacity then shifts automatically to a real-time FCFS pool. Redis Lua scripts guarantee atomic acquisition, eliminating double-booking races under high-concurrency spikes. The staff entry portal manages live venue flow via Auto and Manual call modes — tickets progress through a protected status machine (Waiting → Queued → Ready → Used/Expired) with immutable terminal states to prevent accidental overrides, and capacity can be adjusted dynamically based on real-time venue conditions.",
     stack: ["Django", "Redis", "Celery", "AWS", "Figma"],
-    demo: null,
-    category: "Backend Systems",
+    demo: "https://www.jyp-reserve.jp/",
+    category: "Full Stack SaaS",
     featured: true,
   },
   {
