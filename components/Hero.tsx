@@ -174,7 +174,7 @@ export default function Hero() {
             {/* Scan line sweeping inside a clipped circle */}
             <div className="absolute inset-0 rounded-full overflow-hidden z-10 pointer-events-none">
               <div
-                className="absolute left-0 right-0 h-px bg-gradient-to-r from-transparent via-green-600/50 dark:via-green-400/50 to-transparent"
+                className="absolute left-0 right-0 h-px bg-gradient-to-r from-transparent via-green-700/90 dark:via-green-700/80 to-transparent"
                 style={{ top: 0, animation: "scanDown 3s linear infinite" }}
               />
             </div>
