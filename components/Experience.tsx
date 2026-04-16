@@ -1,7 +1,7 @@
 "use client";
 
-import { ExternalLink } from "lucide-react";
-import { EXPERIENCE } from "@/lib/data";
+import { ExternalLink, GraduationCap } from "lucide-react";
+import { EXPERIENCE, EDUCATION } from "@/lib/data";
 import ScrollReveal from "@/components/ScrollReveal";
 import { useLang } from "@/context/LanguageContext";
 import { i18n } from "@/lib/i18n";
@@ -89,6 +89,66 @@ export default function Experience() {
                         ))}
                       </ul>
                     </a>
+                  </div>
+                </div>
+              </ScrollReveal>
+            ))}
+          </div>
+        </div>
+
+        {/* Education */}
+        <div className="relative mt-24 pt-16 border-t border-zinc-200/60 dark:border-zinc-800/60">
+          <ScrollReveal>
+            <p className="text-xs font-medium tracking-[0.3em] uppercase text-zinc-500 mb-4">
+              {t.educationLabel}
+            </p>
+            <h2 className="text-3xl md:text-4xl font-bold text-zinc-900 dark:text-zinc-100 mb-12">
+              {t.educationHeading}
+            </h2>
+          </ScrollReveal>
+
+          <div className="relative">
+            <div className="absolute left-0 md:left-[180px] top-0 bottom-0 w-px bg-zinc-200 dark:bg-zinc-800 hidden sm:block" />
+
+            {EDUCATION.map((edu, i) => (
+              <ScrollReveal key={i} delay={i * 150}>
+                <div className="grid grid-cols-1 md:grid-cols-[180px_1fr] gap-4 md:gap-12">
+                  {/* Period */}
+                  <div className="md:text-right md:pr-10 flex-shrink-0">
+                    <span className="text-xs font-medium tracking-widest uppercase text-zinc-500">
+                      {edu.period}
+                    </span>
+                  </div>
+
+                  {/* Content */}
+                  <div className="relative pl-0 sm:pl-10">
+                    {/* Timeline dot */}
+                    <div className="absolute left-0 top-1 w-2 h-2 rounded-full border border-zinc-300 dark:border-zinc-600 bg-white dark:bg-zinc-950 hidden sm:block -translate-x-[1px]" />
+
+                    <div className="glass rounded-sm p-6">
+                      <div className="flex items-start gap-4">
+                        <div className="w-9 h-9 rounded-sm bg-zinc-100 dark:bg-zinc-800 flex items-center justify-center flex-shrink-0">
+                          <GraduationCap size={16} className="text-zinc-500 dark:text-zinc-400" />
+                        </div>
+                        <div>
+                          <h3 className="text-base font-bold text-zinc-900 dark:text-zinc-100 mb-0.5">
+                            {edu.degree}
+                          </h3>
+                          <p className="text-sm font-medium text-zinc-600 dark:text-zinc-400">
+                            {edu.url ? (
+                              <a href={edu.url} target="_blank" rel="noopener noreferrer"
+                                className="inline-flex items-center gap-1 hover:text-zinc-900 dark:hover:text-zinc-200 transition-colors group/edu">
+                                {edu.institution}
+                                <ExternalLink size={11} className="opacity-0 group-hover/edu:opacity-60 transition-opacity" />
+                              </a>
+                            ) : edu.institution}
+                          </p>
+                          <p className="text-xs text-zinc-400 dark:text-zinc-600 mt-0.5">
+                            {edu.location}
+                          </p>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </ScrollReveal>

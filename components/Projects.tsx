@@ -847,15 +847,32 @@ function ProjectContent({ project }: { project: Project }) {
   );
 }
 
+// ── Category filter tabs ──────────────────────────────────────────────────────
+const CATEGORIES: { en: string; jp: string }[] = [
+  { en: "Computer Vision",        jp: "コンピュータービジョン" },
+  { en: "Full Stack SaaS",        jp: "フルスタックSaaS" },
+  { en: "AIoT",                   jp: "AIoT" },
+  { en: "Generative AI",          jp: "生成AI" },
+  { en: "Infrastructure Automation", jp: "インフラ自動化" },
+];
+
 // ── Main ─────────────────────────────────────────────────────────────────────
 export default function Projects() {
   const [showAll, setShowAll] = useState(false);
+  const [activeCategory, setActiveCategory] = useState<string>("All");
   const { lang } = useLang();
   const t = i18n[lang].projects;
 
   const featured = PROJECTS.filter((p) => p.featured);
   const additional = PROJECTS.filter((p) => !p.featured);
-  const visible = showAll ? PROJECTS : featured;
+  const visible = activeCategory === "All"
+    ? (showAll ? PROJECTS : featured)
+    : PROJECTS.filter((p) => p.category === activeCategory);
+
+  const handleCategoryClick = (cat: string) => {
+    setActiveCategory(cat);
+    if (cat !== "All") setShowAll(false);
+  };
 
   return (
     <section id="projects" className="section-padding border-t border-zinc-200/60 dark:border-zinc-800/60">
@@ -864,7 +881,7 @@ export default function Projects() {
           <p className="text-xs font-medium tracking-[0.3em] uppercase text-zinc-500 mb-4">
             {t.label}
           </p>
-          <div className="flex items-end justify-between mb-12">
+          <div className="flex items-end justify-between mb-8">
             <h2 className="text-3xl md:text-4xl font-bold text-zinc-900 dark:text-zinc-100">
               {t.heading}
             </h2>
@@ -882,9 +899,42 @@ export default function Projects() {
               </span>
             </div>
           </div>
+
+          {/* Category filter tabs */}
+          <div className="flex items-center gap-2 overflow-x-auto pb-2 mb-8 scrollbar-hide">
+            {/* "All" tab */}
+            <button
+              onClick={() => handleCategoryClick("All")}
+              className={`flex-shrink-0 text-xs px-3 py-1.5 rounded-sm border tracking-wide transition-all duration-200 ${
+                activeCategory === "All"
+                  ? "border-zinc-800 dark:border-zinc-300 bg-zinc-900 dark:bg-zinc-100 text-white dark:text-zinc-900 font-medium"
+                  : "border-zinc-300 dark:border-zinc-700 text-zinc-500 dark:text-zinc-400 hover:border-zinc-500 dark:hover:border-zinc-500 hover:text-zinc-800 dark:hover:text-zinc-200"
+              }`}
+            >
+              {t.filterAll}
+            </button>
+            {CATEGORIES.map(({ en, jp }) => (
+              <button
+                key={en}
+                onClick={() => handleCategoryClick(en)}
+                className={`flex-shrink-0 text-xs px-3 py-1.5 rounded-sm border tracking-wide transition-all duration-200 ${
+                  activeCategory === en
+                    ? "border-zinc-800 dark:border-zinc-300 bg-zinc-900 dark:bg-zinc-100 text-white dark:text-zinc-900 font-medium"
+                    : "border-zinc-300 dark:border-zinc-700 text-zinc-500 dark:text-zinc-400 hover:border-zinc-500 dark:hover:border-zinc-500 hover:text-zinc-800 dark:hover:text-zinc-200"
+                }`}
+              >
+                {lang === "jp" ? jp : en}
+              </button>
+            ))}
+          </div>
+
+          {/* Proprietary note */}
+          <p className="text-[11px] text-zinc-400 dark:text-zinc-500 mt-2">
+            * {t.proprietaryNote}
+          </p>
         </ScrollReveal>
 
-        <div className="flex flex-col gap-3">
+        <div className="flex flex-col gap-3 mt-8">
           {visible.map((project, i) => (
             <ScrollReveal key={project.id} delay={(i % 6) * 80}>
               <div className="group glass rounded-sm hover:border-zinc-300 dark:hover:border-zinc-700 transition-all duration-300 overflow-hidden">
@@ -909,8 +959,8 @@ export default function Projects() {
           ))}
         </div>
 
-        {/* See more / collapse toggle */}
-        {additional.length > 0 && (
+        {/* See more / collapse toggle — only shown in "All" view */}
+        {activeCategory === "All" && additional.length > 0 && (
           <ScrollReveal delay={100}>
             <div className="mt-8 flex justify-center">
               <button
@@ -932,6 +982,7 @@ export default function Projects() {
             </div>
           </ScrollReveal>
         )}
+
       </div>
     </section>
   );

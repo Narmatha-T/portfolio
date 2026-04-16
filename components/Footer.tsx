@@ -59,6 +59,14 @@ export default function Footer() {
             <p className="text-[10px] font-medium tracking-[0.25em] uppercase text-zinc-400 dark:text-zinc-600 mb-4">
               {t.contactHeading}
             </p>
+            <a
+              href="https://mail.google.com/mail/?view=cm&to=thiyagarajannarmatha@gmail.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-xs text-zinc-500 dark:text-zinc-400 hover:text-zinc-800 dark:hover:text-zinc-200 transition-colors mb-3 block"
+            >
+              thiyagarajannarmatha@gmail.com
+            </a>
             <div className="flex items-center gap-3">
               <a
                 href="https://mail.google.com/mail/?view=cm&to=thiyagarajannarmatha@gmail.com"

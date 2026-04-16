@@ -180,6 +180,7 @@ export default function Hero() {
                 src="/photo-1.png"
                 alt="Narmatha Thiyagarajan"
                 fill
+                sizes="(max-width: 768px) 256px, (max-width: 1024px) 320px, 450px"
                 style={{ objectPosition: '50% 45%' }}
                 className={`object-cover transition-opacity duration-500 ${imageLoaded ? "opacity-100" : "opacity-0"}`}
                 priority

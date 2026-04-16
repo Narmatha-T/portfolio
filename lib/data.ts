@@ -146,7 +146,7 @@ export const PROJECTS: Project[] = [
       "MEGURU is a smartphone-based patrol support system that uses AI image recognition to verify vehicle license plates during parking lot inspections — providing audio confirmation per vehicle, real-time dashboard reporting, missed patrol alerts, and blacklist monitoring for flagged vehicles. Built and fine-tuned custom models for number plate detection and recognition for Japanese regional plate formats, and deployed to Core ML for iPhone-compatible, zero-latency on-device inference.",
     stack: ["YOLO", "Core ML", "PyTorch", "iOS", "Python"],
     demo: "https://meguru.run/",
-    category: "COMPUTER VISION",
+    category: "Computer Vision",
     featured: true,
   },
   {
@@ -158,7 +158,7 @@ export const PROJECTS: Project[] = [
       "Developed for Japan's Building Research Institute (BRI) under the Cabinet Office's Strategic Innovation Promotion Program (SIP) — a national initiative to digitise construction inspection and infrastructure lifecycle management. Developed a computer vision pipeline to classify wall surfaces: Sprayed, Rippled, Sandy, and Head-tamped across six stages of degradation, achieving 90%+ accuracy after researching and fine-tuning the ConvNeXt-based OSS model on a local machine with an NVIDIA RTX 4070 Ti graphics card. The system was then deployed to Sakura VPS for real-time inference and benchmarking.",
     stack: ["ConvNeXt", "PyTorch", "Python", "Ubuntu"],
     demo: null,
-    category: "COMPUTER VISION",
+    category: "Computer Vision",
     featured: true,
     client: { name: "Building Research Institute", url: "https://www.kenken.go.jp/" },
   },
@@ -183,7 +183,7 @@ export const PROJECTS: Project[] = [
       "Built for a factory automation manufacturer specializing in environmental solutions. A USB camera captures live video of a recycling conveyor belt; a fine-tuned YOLO model detects and classifies clear (white) and brown glass bottles, distinguishing them from mixed waste including cans, PET bottles, and other coloured glass bottles. Detection coordinates are streamed to an Omron PLC, which actuates a robotic arm to pick and remove target bottles — fully automating a critical recycling step. Delivered across two project phases with a custom-annotated dataset.",
     stack: ["YOLO", "PyTorch", "Python", "OpenCV"],
     demo: "https://www.npcgroup.net/",
-    category: "COMPUTER VISION",
+    category: "Computer Vision",
     featured: true,
   },
   {
@@ -195,7 +195,7 @@ export const PROJECTS: Project[] = [
       "Built to prevent frozen food wastage at Jonanjima Logistics Center (Ota City) — a 27,000-ton cold storage hub where offloading bottlenecks leave drivers waiting over hours to offload, leaving temperature-sensitive cargo at risk in non-refrigerated staging areas. ArUco markers are affixed on top of the frozen containers; the system detects each marker and starts a configurable countdown timer (e.g. 30–60 min). When the threshold is exceeded, an alert fires on a web dashboard prompting staff to move the container into the freezer. MobileSAM runs in parallel to segment and visually track each luggage item in the staging area.",
     stack: ["MobileSAM", "OpenCV", "ArUco", "PyTorch", "Python"],
     demo: "https://www.logi.umios.com/group_company_kanto/",
-    category: "COMPUTER VISION",
+    category: "Computer Vision",
     featured: true,
   },
   // ── Additional ────────────────────────────────────────────────────────────
@@ -208,7 +208,7 @@ export const PROJECTS: Project[] = [
       "Developed an automated face authentication layer to digitize and secure staff attendance for patrol operations. Previously, officers manually uploaded selfies before shifts — a process that was time-consuming, difficult to audit, and prone to bypass. This system now verifies identities in real-time by matching staff faces against a registered database using FaceNet512. To ensure high-speed performance on-site, I optimized the detection pipeline by replacing MTCNN with a YuNet and MediaPipe hybrid approach (utilizing a failover mechanism), achieving a 12.5× improvement in face detection latency.",
     stack: ["Python", "OpenCV","FaceNet512", "Yunet", "MediaPipe"],
     demo: "https://meguru.run/",
-    category: "COMPUTER VISION",
+    category: "Computer Vision",
     featured: false,
   },
   {
@@ -246,6 +246,26 @@ export const PROJECTS: Project[] = [
     demo: null,
     category: "Generative AI",
     featured: false,
+  },
+];
+
+// ── Education ─────────────────────────────────────────────────────────────────
+
+export type EducationEntry = {
+  period: string;
+  degree: string;
+  institution: string;
+  location: string;
+  url?: string;
+};
+
+export const EDUCATION: EducationEntry[] = [
+  {
+    period: "2019 – 2023",
+    degree: "Bachelor of Engineering in Computer Science",
+    institution: "Dayananda Sagar University",
+    location: "Bangalore, India",
+    url: "https://www.dsu.edu.in/",
   },
 ];
 

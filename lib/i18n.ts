@@ -54,11 +54,16 @@ const en = {
     showLess: "Show Less",
     moreProjects: (n: number) => `${n} More Projects`,
     countLabel: (n: number) => `${n} Projects`,
+    filterAll: "All",
+    proprietaryNote: "All projects are proprietary enterprise software — source code is not publicly available.",
+    viewProfile: "View GitHub Profile",
   },
   experience: {
     label: "03 — Experience",
     heading: "Career Timeline",
     current: "Current",
+    educationLabel: "04 — Education",
+    educationHeading: "Academic Background",
   },
   footer: {
     tagline: "Building responsibly, delivering end-to-end AI solutions.",
@@ -66,6 +71,21 @@ const en = {
     navHeading: "Navigation",
     contactHeading: "Get in Touch",
     copyright: (year: number) => `\u00a9 ${year} Narmatha Thiyagarajan. All rights reserved.`,
+  },
+  chat: {
+    toggleLabel: "Ask about me",
+    heading: "Narmatha's AI",
+    status: "Online",
+    greeting: "Hi! I'm an AI assistant for this portfolio. Ask me anything about Narmatha's background, projects, or skills.",
+    placeholder: "Ask anything about Narmatha…",
+    suggestions: [
+      "What projects has she built?",
+      "What are her key skills?",
+      "Is she open to work?",
+      "What's her Japanese level?",
+    ],
+    error: "Something went wrong. Please try again.",
+    apiNotConfigured: "The AI assistant isn't configured yet. Please add the API key to get started.",
   },
   highlights: [
     {
@@ -151,11 +171,16 @@ const jp = {
     showLess: "折りたたむ",
     moreProjects: (n: number) => `さらに ${n} 件`,
     countLabel: (n: number) => `${n} 件`,
+    filterAll: "すべて",
+    proprietaryNote: "すべてのプロジェクトは企業向け業務システムです — ソースコードは公開されていません。",
+    viewProfile: "GitHub プロフィールを見る",
   },
   experience: {
     label: "03 — 経験",
     heading: "キャリア履歴",
     current: "現職",
+    educationLabel: "04 — 学歴",
+    educationHeading: "学術的背景",
   },
   footer: {
     tagline: "責任ある開発で、AIをエンドツーエンドに。",
@@ -163,6 +188,21 @@ const jp = {
     navHeading: "ナビゲーション",
     contactHeading: "お問い合わせ",
     copyright: (year: number) => `\u00a9 ${year} Narmatha Thiyagarajan. 無断複製禁止。`,
+  },
+  chat: {
+    toggleLabel: "AIに聞く",
+    heading: "Narmathaのアシスタント",
+    status: "オンライン",
+    greeting: "こんにちは！このポートフォリオのAIアシスタントです。Narmathaの経歴・プロジェクト・スキルについて何でもどうぞ。",
+    placeholder: "Narmathaについて質問してください…",
+    suggestions: [
+      "どんなプロジェクトを作りましたか？",
+      "得意なスキルは何ですか？",
+      "現在転職を考えていますか？",
+      "日本語レベルはどのくらいですか？",
+    ],
+    error: "エラーが発生しました。もう一度お試しください。",
+    apiNotConfigured: "AIアシスタントはまだ設定されていません。",
   },
   highlights: [
     {

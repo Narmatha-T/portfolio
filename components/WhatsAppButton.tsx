@@ -14,7 +14,7 @@ export default function WhatsAppButton() {
       rel="noopener noreferrer"
       aria-label="Chat on WhatsApp"
       className="
-        fixed bottom-6 right-6 z-50
+        fixed bottom-6 left-6 z-50
         group
         flex items-center gap-2
         px-3 py-3 sm:px-4
