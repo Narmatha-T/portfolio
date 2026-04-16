@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { useState } from "react";
-import { Download, ExternalLink, MapPin } from "lucide-react";
+import { ExternalLink, MapPin } from "lucide-react";
 import { useLang } from "@/context/LanguageContext";
 import { i18n } from "@/lib/i18n";
 
@@ -111,14 +111,6 @@ export default function Hero() {
                   size={14}
                   className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform"
                 />
-              </a>
-              <a
-                href="/resume.pdf"
-                download
-                className="group inline-flex items-center gap-2 px-6 py-3 border border-zinc-300 dark:border-zinc-700 text-zinc-700 dark:text-zinc-300 text-sm font-medium rounded-sm hover:border-green-500/50 dark:hover:border-green-400/50 hover:text-zinc-900 dark:hover:text-white transition-all duration-200"
-              >
-                <Download size={14} />
-                {t.ctaResume}
               </a>
             </div>
 

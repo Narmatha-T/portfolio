@@ -118,13 +118,6 @@ export default function Navbar() {
               </span>
             </button>
           )}
-          <a
-            href="/resume.pdf"
-            download
-            className="flex items-center gap-2 text-sm font-medium tracking-widest uppercase px-4 py-2 border border-zinc-300 dark:border-zinc-700 rounded-sm text-zinc-700 dark:text-zinc-300 hover:border-zinc-500 dark:hover:border-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-all"
-          >
-            Resume
-          </a>
         </div>
 
         {/* Mobile controls */}
@@ -185,13 +178,6 @@ export default function Navbar() {
                 {NAV_LABELS[link.label] ?? link.label}
               </a>
             ))}
-            <a
-              href="/resume.pdf"
-              download
-              className="text-sm font-medium text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors py-1"
-            >
-              {lang === "jp" ? "履歴書をダウンロード" : "Download Resume"}
-            </a>
             <button
               onClick={toggleLang}
               className="text-left text-sm font-medium text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors py-1"
