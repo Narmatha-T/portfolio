@@ -12,44 +12,89 @@ const ANIM_IDS = new Set(["01", "02", "03", "04", "05", "06", "07", "08", "09", 
 // ── Animation content (fills its container absolutely) ───────────────────────
 function ProjectAnimation({ id }: { id: string }) {
   if (id === "01") return (
-    <div className="absolute inset-0 overflow-hidden">
+    <div className="absolute inset-0 overflow-hidden flex items-center justify-center py-2 px-3"
+      style={{ background: "rgba(245,245,247,0.04)" }}>
       <style>{`
-        @keyframes tk_card  { 0%{transform:translateX(-220px);opacity:0;} 8%{opacity:1;} 88%{opacity:1;} 96%{transform:translateX(220px);opacity:0;} 100%{transform:translateX(220px);opacity:0;} }
-        @keyframes tk_line  { 0%,40%{opacity:0.15;box-shadow:none;} 46%,56%{opacity:1;box-shadow:0 0 18px 5px rgba(168,85,247,0.7);} 64%,100%{opacity:0.15;box-shadow:none;} }
-        @keyframes tk_badge { 0%,55%{opacity:0;transform:translateY(6px);} 63%,84%{opacity:1;transform:translateY(0);} 92%,100%{opacity:0;} }
+        @keyframes zt_enter    { 0%{transform:translateY(24px);opacity:0;} 10%{transform:translateY(0);opacity:1;} 85%{transform:translateY(0);opacity:1;} 95%,100%{transform:translateY(-16px);opacity:0;} }
+        @keyframes zt_thumb    { 0%,20%{transform:translateX(0px);} 22%{transform:translateX(3px);} 55%{transform:translateX(90px);} 85%{transform:translateX(90px);} 92%,100%{transform:translateX(90px);} }
+        @keyframes zt_thumbcol { 0%,52%{background:#111111;} 58%,100%{background:#9ca3af;} }
+        @keyframes zt_arrow    { 0%,20%{opacity:1;} 48%,100%{opacity:0;} }
+        @keyframes zt_check    { 0%,54%{opacity:0;transform:scale(0.6);} 61%,85%{opacity:1;transform:scale(1);} 92%,100%{opacity:0;} }
+        @keyframes zt_lbl      { 0%,20%{opacity:0.7;} 42%,100%{opacity:0;} }
+        @keyframes zt_used_lbl { 0%,56%{opacity:0;} 64%,85%{opacity:1;} 92%,100%{opacity:0;} }
+        @keyframes zt_track    { 0%,54%{background:rgb(229,231,235);} 60%,100%{background:rgb(243,244,246);} }
       `}</style>
 
-      {/* Reader line — fixed center */}
-      <div className="absolute inset-y-4 left-1/2 -translate-x-1/2 w-[2px] rounded-full bg-purple-400"
-        style={{ animation: "tk_line 5s ease-in-out infinite" }} />
+      {/* Phone-like ticket card */}
+      <div className="w-[148px] rounded-[10px] overflow-hidden shadow-2xl border border-zinc-200/60"
+        style={{ background: "#ffffff", animation: "zt_enter 9s ease-in-out infinite" }}>
 
-      {/* Sliding ticket */}
-      <div className="absolute inset-0 flex items-center justify-center pointer-events-none"
-        style={{ animation: "tk_card 5s ease-in-out infinite" }}>
-        <div className="w-[110px] h-[58px] rounded-[4px] overflow-hidden border border-purple-400/50 shadow-lg flex-shrink-0"
-          style={{ background: 'linear-gradient(135deg, rgba(88,28,135,0.9) 0%, rgba(49,10,101,0.95) 100%)' }}>
-          <div className="px-2.5 pt-[6px]">
-            <div className="text-[8px] font-bold text-white font-mono tracking-widest">ADO LIVE 2025</div>
-            <div className="text-[6px] text-purple-300/80 font-mono mt-[1px]">TOKYO DOME</div>
-          </div>
-          <div className="px-2.5 pt-[4px] flex items-center justify-between">
-            <div>
-              <div className="text-[5px] text-purple-400/60 font-mono uppercase tracking-wider">Seat</div>
-              <div className="text-[11px] font-bold text-purple-100 font-mono leading-none">A-12</div>
-            </div>
-            <div className="flex gap-[1.5px] items-end">
-              {[3,5,2,4,5,2,3,4,2,5,3,4,2,5].map((h, i) => (
-                <div key={i} className="w-[1.5px] bg-purple-300/50 rounded-[0.5px]" style={{ height: `${h * 3}px` }} />
-              ))}
-            </div>
-          </div>
+        {/* Event banner */}
+        <div className="h-[18px] flex items-center justify-center relative overflow-hidden px-2"
+          style={{ background: "linear-gradient(135deg,#2d0057 0%,#6b21a8 60%,#9333ea 100%)" }}>
+          <span className="text-[5px] font-bold text-white text-center leading-tight font-mono">「TWICE ＜THIS IS FOR＞ WORLD TOUR IN JAPAN」POPUP STORE - 大阪 -</span>
+          <div className="absolute inset-0 opacity-10"
+            style={{ backgroundImage: "repeating-linear-gradient(45deg,#fff 0,#fff 1px,transparent 0,transparent 50%)", backgroundSize: "4px 4px" }} />
         </div>
-      </div>
 
-      {/* Confirmation badge */}
-      <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex items-center gap-1.5 bg-purple-500/10 border border-purple-500/40 px-3 py-1 rounded-full opacity-0"
-        style={{ animation: "tk_badge 5s ease-in-out infinite" }}>
-        <span className="text-[10px] font-mono font-bold text-purple-400 dark:text-purple-300 tracking-wider">✓ ENTRY GRANTED</span>
+        {/* Event key visual */}
+        <div className="relative h-[14px] overflow-hidden border-b border-zinc-200/60">
+          <div className="absolute inset-0" style={{ background: "linear-gradient(110deg,#ff4e8c 0%,#ff8fab 35%,#c084fc 65%,#818cf8 100%)" }} />
+          <div className="absolute w-[24px] h-[24px] rounded-full opacity-30" style={{ background: "radial-gradient(circle,#fff 0%,transparent 70%)", top: "-8px", left: "12px" }} />
+          <div className="absolute w-[18px] h-[18px] rounded-full opacity-20" style={{ background: "radial-gradient(circle,#fff 0%,transparent 70%)", top: "-4px", right: "24px" }} />
+          <div className="absolute inset-0 flex items-center justify-center">
+            <span className="text-[7px] font-black text-white tracking-[0.25em]" style={{ textShadow: "0 1px 4px rgba(0,0,0,0.35)" }}>TWICE</span>
+          </div>
+          <span className="absolute text-white/50 text-[5px]" style={{ top: "1px", left: "8px" }}>✦</span>
+          <span className="absolute text-white/40 text-[4px]" style={{ bottom: "1px", right: "10px" }}>✦</span>
+        </div>
+
+        {/* Ticket body */}
+        <div className="px-3 pt-[3px] pb-[4px]" style={{ background: "#ffffff" }}>
+
+          {/* ご案内時間 */}
+          <p className="text-center text-[6px] text-zinc-400 tracking-wide leading-none mb-[2px]">ご案内時間</p>
+          <p className="text-center text-[9px] font-bold text-zinc-800 leading-none mb-[3px]">14:00 ～ 15:15</p>
+
+          {/* Divider */}
+          <div className="border-t border-dashed border-zinc-200 mb-[3px]" />
+
+          {/* 整理券番号 */}
+          <p className="text-center text-[6px] text-zinc-400 tracking-wide leading-none mb-[1px]">整理券番号</p>
+          <p className="text-center font-black text-zinc-900 leading-none mb-[4px]"
+            style={{ fontSize: "20px", fontFamily: "monospace" }}>
+            A-011
+          </p>
+
+          {/* ── Swipe track ── */}
+          <div className="relative h-[22px] rounded-full overflow-hidden flex items-center px-[3px]"
+            style={{ animation: "zt_track 9s ease-in-out infinite" }}>
+
+            {/* Sliding thumb */}
+            <div className="absolute top-[2px] left-[2px] h-[18px] w-[18px] rounded-full flex items-center justify-center shadow-md z-10"
+              style={{ animation: "zt_thumb 9s cubic-bezier(0.4,0,0.2,1) infinite, zt_thumbcol 9s ease-in-out infinite" }}>
+              {/* Arrow (before swipe) */}
+              <span className="absolute text-white text-[11px] font-bold leading-none select-none"
+                style={{ animation: "zt_arrow 9s ease-in-out infinite" }}>→</span>
+              {/* Check (after swipe) */}
+              <span className="absolute text-white text-[10px] font-bold leading-none select-none opacity-0"
+                style={{ animation: "zt_check 9s ease-in-out infinite" }}>✓</span>
+            </div>
+
+            {/* "利用する" label — fades as thumb moves */}
+            <span className="absolute inset-0 flex items-center justify-center text-[8.5px] font-semibold text-zinc-500 pointer-events-none select-none"
+              style={{ animation: "zt_lbl 9s ease-in-out infinite" }}>
+              利用する
+            </span>
+
+            {/* "利用済みです" — left-aligned so it doesn't collide with thumb at right end */}
+            <span className="absolute inset-0 flex items-center justify-center text-[7.5px] font-medium text-zinc-400 pointer-events-none select-none opacity-0 whitespace-nowrap"
+              style={{ animation: "zt_used_lbl 9s ease-in-out infinite" }}>
+              利用済みです
+            </span>
+          </div>
+
+        </div>
       </div>
     </div>
   );
