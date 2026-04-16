@@ -868,9 +868,19 @@ export default function Projects() {
             <h2 className="text-3xl md:text-4xl font-bold text-zinc-900 dark:text-zinc-100">
               {t.heading}
             </h2>
-            <span className="hidden sm:block text-xs text-zinc-400 dark:text-zinc-500 tracking-widest uppercase">
-              {t.countLabel(PROJECTS.length)}
-            </span>
+            <div className="flex flex-col items-end gap-1.5">
+              <span className="hidden sm:block text-xs text-zinc-400 dark:text-zinc-500 tracking-widest uppercase">
+                {t.countLabel(PROJECTS.length)}
+              </span>
+              <span className="hidden sm:flex items-center gap-1.5 text-[10px] text-zinc-400 dark:text-zinc-500">
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 2a10 10 0 1 0 0 20A10 10 0 0 0 12 2z"/><path d="M12 8v4l3 3"/></svg>
+                Hover to see a quick preview
+              </span>
+              <span className="flex sm:hidden items-center gap-1.5 text-[10px] text-zinc-400 dark:text-zinc-500">
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 11V6a2 2 0 0 0-4 0v5"/><path d="M14 10V4a2 2 0 0 0-4 0v6"/><path d="M10 10.5V6a2 2 0 0 0-4 0v8"/><path d="M6 14a4 4 0 0 0 4 4h4a4 4 0 0 0 4-4v-2.5"/></svg>
+                Tap to see a quick preview
+              </span>
+            </div>
           </div>
         </ScrollReveal>
 
