@@ -263,7 +263,7 @@ export type PublicationEntry = {
 export const PUBLICATIONS: PublicationEntry[] = [
   {
     title: "Intelligent Driver Alert System on Pothole Detection using Deep Learning Techniques",
-    venue: "International Journal of Research Publication and Reviews, Vol. 1, Issue 1",
+    venue: "March 2023 · Narmatha Thiyagarajan et al.",
     date: "March 2023",
     authors: "Narmatha Thiyagarajan et al.",
     stack: ["YOLO", "CNN", "OpenCV", "VGG16", "Transfer Learning"],

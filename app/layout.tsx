@@ -15,6 +15,7 @@ export const metadata: Metadata = {
     "Narmatha Thiyagarajan",
   ],
   authors: [{ name: "Narmatha Thiyagarajan" }],
+  icons: { icon: "/icon.svg" },
   openGraph: {
     title: "Narmatha Thiyagarajan — AI Engineer",
     description:

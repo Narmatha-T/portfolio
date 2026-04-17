@@ -10,6 +10,8 @@ export default function Experience() {
   const { lang } = useLang();
   const t = i18n[lang].experience;
   const expHighlights = i18n[lang].experienceHighlights;
+  const eduData = i18n.jp.educationData;
+  const expData = i18n.jp.experienceData;
 
   return (
     <section
@@ -32,7 +34,12 @@ export default function Experience() {
           <div className="absolute left-0 md:left-[180px] top-0 bottom-0 w-px bg-zinc-200 dark:bg-zinc-800 hidden sm:block" />
 
           <div className="space-y-12">
-            {EXPERIENCE.map((exp, i) => (
+            {EXPERIENCE.map((exp, i) => {
+              const jpExp   = lang === "jp" ? expData[i] : undefined;
+              const role     = jpExp ? jpExp.role     : exp.role;
+              const company  = jpExp ? jpExp.company  : exp.company;
+              const location = jpExp ? jpExp.location : exp.location;
+              return (
               <ScrollReveal key={i} delay={i * 150}>
                 <div className="grid grid-cols-1 md:grid-cols-[180px_1fr] gap-4 md:gap-12">
                   {/* Period */}
@@ -64,16 +71,16 @@ export default function Experience() {
                       <div className="flex items-start justify-between mb-4">
                         <div>
                           <h3 className="text-base font-bold text-zinc-900 dark:text-zinc-100 mb-0.5">
-                            {exp.role}
+                            {role}
                           </h3>
                           <p className="text-sm font-medium text-zinc-600 dark:text-zinc-400 inline-flex items-center gap-1">
-                            {exp.company}
+                            {company}
                             {exp.url && (
                               <ExternalLink size={11} className="opacity-0 group-hover/card:opacity-60 transition-opacity" />
                             )}
                           </p>
                           <p className="text-xs text-zinc-400 dark:text-zinc-600 mt-0.5">
-                            {exp.location}
+                            {location}
                           </p>
                         </div>
                       </div>
@@ -92,7 +99,8 @@ export default function Experience() {
                   </div>
                 </div>
               </ScrollReveal>
-            ))}
+              );
+            })}
           </div>
         </div>
 
@@ -111,7 +119,12 @@ export default function Experience() {
             <div className="absolute left-0 md:left-[180px] top-0 bottom-0 w-px bg-zinc-200 dark:bg-zinc-800 hidden sm:block" />
 
             <div className="space-y-8">
-            {EDUCATION.map((edu, i) => (
+            {EDUCATION.map((edu, i) => {
+              const jpEdu = lang === "jp" ? eduData[i] : undefined;
+              const degree      = jpEdu ? jpEdu.degree      : edu.degree;
+              const institution = jpEdu ? jpEdu.institution : edu.institution;
+              const location    = jpEdu ? jpEdu.location    : edu.location;
+              return (
               <ScrollReveal key={i} delay={i * 150}>
                 <div className="grid grid-cols-1 md:grid-cols-[180px_1fr] gap-4 md:gap-12">
                   {/* Period */}
@@ -133,19 +146,19 @@ export default function Experience() {
                         </div>
                         <div>
                           <h3 className="text-base font-bold text-zinc-900 dark:text-zinc-100 mb-0.5">
-                            {edu.degree}
+                            {degree}
                           </h3>
                           <p className="text-sm font-medium text-zinc-600 dark:text-zinc-400">
                             {edu.url ? (
                               <a href={edu.url} target="_blank" rel="noopener noreferrer"
                                 className="inline-flex items-center gap-1 hover:text-zinc-900 dark:hover:text-zinc-200 transition-colors group/edu">
-                                {edu.institution}
+                                {institution}
                                 <ExternalLink size={11} className="opacity-0 group-hover/edu:opacity-60 transition-opacity" />
                               </a>
-                            ) : edu.institution}
+                            ) : institution}
                           </p>
                           <p className="text-xs text-zinc-400 dark:text-zinc-600 mt-0.5">
-                            {edu.location}
+                            {location}
                           </p>
                         </div>
                       </div>
@@ -153,7 +166,8 @@ export default function Experience() {
                   </div>
                 </div>
               </ScrollReveal>
-            ))}
+              );
+            })}
             </div>
           </div>
         </div>

@@ -50,7 +50,7 @@ She is currently employed at Akatsuki AI Technologies. For collaborations, proje
 
 export async function POST(req: NextRequest) {
   try {
-    const { messages } = await req.json();
+    const { messages, lang } = await req.json();
 
     const apiKey = process.env.GROQ_API_KEY;
     if (!apiKey || apiKey === "your_api_key_here") {
@@ -61,7 +61,10 @@ export async function POST(req: NextRequest) {
 
     const stream = await client.chat.completions.create({
       model: "llama-3.3-70b-versatile",
-      messages: [{ role: "system", content: SYSTEM_PROMPT }, ...messages],
+      messages: [
+        { role: "system", content: SYSTEM_PROMPT + (lang === "jp" ? "\n\nIMPORTANT: The user is browsing in Japanese. Always respond in Japanese." : "") },
+        ...messages,
+      ],
       max_tokens: 512,
       stream: true,
     });

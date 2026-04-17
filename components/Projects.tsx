@@ -902,10 +902,8 @@ function PublicationCard({ pub, index }: { pub: PublicationEntry; index: number 
   const { lang } = useLang();
   const t = i18n[lang].projects;
   const jp = i18n.jp.publicationsData[index];
-  const title   = lang === "jp" && jp ? jp.title   : pub.title;
-  const venue   = lang === "jp" && jp ? jp.venue   : pub.venue;
-  const date    = lang === "jp" && jp ? jp.date    : pub.date;
-  const authors = lang === "jp" && jp ? jp.authors : pub.authors;
+  const title = lang === "jp" && jp ? jp.title : pub.title;
+  const venue = lang === "jp" && jp ? jp.venue : pub.venue;
 
   return (
     <div className="glass rounded-sm p-5 flex flex-col gap-3 hover:border-zinc-300 dark:hover:border-zinc-700 transition-all duration-300 h-full">
@@ -930,7 +928,6 @@ function PublicationCard({ pub, index }: { pub: PublicationEntry; index: number 
       </div>
       <div>
         <p className="text-xs text-zinc-500 dark:text-zinc-400">{venue}</p>
-        <p className="text-xs text-zinc-400 dark:text-zinc-500 mt-0.5">{date} · {authors}</p>
       </div>
       <div className="flex flex-wrap gap-1.5">
         {pub.stack.map((tech) => (
@@ -1081,10 +1078,8 @@ export default function Projects() {
             ))}
             {visiblePublications.map((pub, i) => {
               const jpPub = i18n.jp.publicationsData[i];
-              const lTitle   = lang === "jp" && jpPub ? jpPub.title   : pub.title;
-              const lVenue   = lang === "jp" && jpPub ? jpPub.venue   : pub.venue;
-              const lDate    = lang === "jp" && jpPub ? jpPub.date    : pub.date;
-              const lAuthors = lang === "jp" && jpPub ? jpPub.authors : pub.authors;
+              const lTitle = lang === "jp" && jpPub ? jpPub.title : pub.title;
+              const lVenue = lang === "jp" && jpPub ? jpPub.venue : pub.venue;
               return (
               <div key={`pub-${i}`} className="glass rounded-sm p-5 hover:border-zinc-300 dark:hover:border-zinc-700 transition-all duration-300">
                 <div className="flex gap-4">
@@ -1097,7 +1092,6 @@ export default function Projects() {
                         <p className="text-xs text-zinc-400 dark:text-zinc-400 tracking-widest mb-0.5">{t.researchPaperCategory}</p>
                         <h3 className="text-sm font-bold text-zinc-900 dark:text-zinc-100">{lTitle}</h3>
                         <p className="text-xs text-zinc-500 dark:text-zinc-400 mt-0.5">{lVenue}</p>
-                        <p className="text-xs text-zinc-400 dark:text-zinc-500 mt-0.5">{lDate} · {lAuthors}</p>
                       </div>
                     </div>
                     <div className="flex flex-wrap items-center gap-3 mt-3 pt-3 border-t border-zinc-200/70 dark:border-zinc-800/70">

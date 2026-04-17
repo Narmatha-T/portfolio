@@ -10,6 +10,16 @@ export type TranslatedPublicationData = {
   date: string;
   authors: string;
 }[];
+export type TranslatedEducationData = {
+  degree: string;
+  institution: string;
+  location: string;
+}[];
+export type TranslatedExperienceData = {
+  role: string;
+  company: string;
+  location: string;
+}[];
 
 const en = {
   nav: {
@@ -117,6 +127,8 @@ const en = {
   ] as TranslatedHighlight[],
   projectsData: {} as TranslatedProjectData,
   publicationsData: [] as TranslatedPublicationData,
+  educationData: [] as TranslatedEducationData,
+  experienceData: [] as TranslatedExperienceData,
   experienceHighlights: [
     [
       "Leading a global team of IIT engineers building production-grade SaaS systems, with all communication conducted in English.",
@@ -152,7 +164,7 @@ const jp = {
     subLLMs: "LLM",
     subBackend: "スケーラブルなバックエンド",
     subSuffix: "現在、AIエンジニア・チームリードとして",
-    subCompany: "Akatsuki AI Technologies",
+    subCompany: "株式会社アカツキAIテクノロジーズ",
     ctaProjects: "プロジェクトを見る",
     ctaResume: "履歴書をダウンロード",
     stats: [
@@ -170,7 +182,7 @@ const jp = {
     p1suffix:
       "・8件以上の本番システム開発を通じて、先進的なAI研究と産業レベルの本番環境の橋渡しを専門としています――日本の国家インフラ検査の自動化（SIP）から、Adoらグローバルアーティスト向けの高負荷チケットプラットフォームの構築まで。",
     p2: "モデル最適化・スケーラブルなバックエンドエンジニアリング（Django/Redis）・クラウドデプロイまでフルスタックで担い、AI研究と本番環境の橋渡しを行っています。推論速度12.5倍改善や同時数万ユーザーを支える堅牢なアーキテクチャなど、高性能な成果を実用レベルで届けることを専門としています。",
-    p3: "現在はAkatsuki AI Technologiesにてインド工科大学（IIT）出身エンジニア4名からなるグローバルチームと共に、日本の大手クライアントとエンジニアリングチームの技術的橋渡しを担っています。東京在住。英語（ネイティブ）とビジネス日本語（JLPT N3/N2）のバイリンガル環境で日々業務を行っています。",
+    p3: "現在は株式会社アカツキAIテクノロジーズにてインド工科大学（IIT）出身エンジニア4名からなるグローバルチームと共に、日本の大手クライアントとエンジニアリングチームの技術的橋渡しを担っています。東京在住。英語（ネイティブ）とビジネス日本語（JLPT N3/N2）のバイリンガル環境で日々業務を行っています。",
   },
   skills: {
     label: "01 — 技術スキル",
@@ -230,7 +242,7 @@ const jp = {
     {
       title: "チームリード＆ブリッジエンジニア",
       description:
-        "Akatsuki AI Technologiesにて4名のIITエンジニアからなるグローバルチームを英語でリード。日本の大手クライアントとチームの技術的橋渡し役を担当。",
+        "株式会社アカツキAIテクノロジーズにて4名のIITエンジニアからなるグローバルチームを英語でリード。日本の大手クライアントとチームの技術的橋渡し役を担当。",
     },
     {
       title: "マルチリンガルエンジニア",
@@ -300,10 +312,34 @@ const jp = {
       category: "生成AI",
     },
   } as TranslatedProjectData,
+  educationData: [
+    {
+      degree: "コンピューターサイエンス学士（BTech）",
+      institution: "Dayananda Sagar University",
+      location: "インド・バンガロール",
+    },
+    {
+      degree: "CBSE 理系課程",
+      institution: "Sri Chaitanya College of Education",
+      location: "インド・バンガロール",
+    },
+  ] as TranslatedEducationData,
+  experienceData: [
+    {
+      role: "AIエンジニア・チームリード",
+      company: "株式会社アカツキAIテクノロジーズ",
+      location: "東京・日本",
+    },
+    {
+      role: "AIエンジニア",
+      company: "株式会社想画 SOHGA Co., Ltd.",
+      location: "東京・日本",
+    },
+  ] as TranslatedExperienceData,
   publicationsData: [
     {
       title: "ディープラーニング技術を用いたポットホール検出によるインテリジェント・ドライバー・アラートシステム",
-      venue: "International Journal of Research Publication and Reviews, Vol. 1, Issue 1",
+      venue: "2023年3月 · Narmatha Thiyagarajan ほか",
       date: "2023年3月",
       authors: "Narmatha Thiyagarajan ほか",
     },

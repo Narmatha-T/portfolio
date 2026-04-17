@@ -128,7 +128,7 @@ export default function Hero() {
           </div>
 
           {/* ── Right: Profile image inside CV detection box ── */}
-          <div className="relative w-64 h-64 md:w-80 md:h-80 lg:w-[450px] lg:h-[450px] shrink-0 lg:-mt-40">
+          <div className="relative w-64 h-64 md:w-80 md:h-80 lg:w-[450px] lg:h-[450px] shrink-0 mt-8 lg:-mt-40">
 
             {/* Corner brackets — pulsing staggered */}
             <span
