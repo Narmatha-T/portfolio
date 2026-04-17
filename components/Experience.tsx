@@ -110,6 +110,7 @@ export default function Experience() {
           <div className="relative">
             <div className="absolute left-0 md:left-[180px] top-0 bottom-0 w-px bg-zinc-200 dark:bg-zinc-800 hidden sm:block" />
 
+            <div className="space-y-8">
             {EDUCATION.map((edu, i) => (
               <ScrollReveal key={i} delay={i * 150}>
                 <div className="grid grid-cols-1 md:grid-cols-[180px_1fr] gap-4 md:gap-12">
@@ -153,6 +154,7 @@ export default function Experience() {
                 </div>
               </ScrollReveal>
             ))}
+            </div>
           </div>
         </div>
       </div>

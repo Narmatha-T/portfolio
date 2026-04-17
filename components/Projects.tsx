@@ -1,9 +1,8 @@
 "use client";
 
-import { ChevronDown, ChevronUp, ExternalLink } from "lucide-react";
+import { ChevronDown, ChevronUp, ExternalLink, LayoutGrid, LayoutList } from "lucide-react";
 import { useState } from "react";
 import { PROJECTS, type Project } from "@/lib/data";
-import ScrollReveal from "@/components/ScrollReveal";
 import { useLang } from "@/context/LanguageContext";
 import { i18n } from "@/lib/i18n";
 
@@ -856,17 +855,59 @@ const CATEGORIES: { en: string; jp: string }[] = [
   { en: "Infrastructure Automation", jp: "インフラ自動化" },
 ];
 
+// ── Card view ────────────────────────────────────────────────────────────────
+function ProjectCard({ project }: { project: Project }) {
+  const { lang } = useLang();
+  const jp = i18n.jp.projectsData[project.id];
+  const tagline = lang === "jp" && jp ? jp.tagline : project.tagline;
+  const category = lang === "jp" && jp ? jp.category : project.category;
+  const Icon = project.icon;
+  const link = project.demo ?? project.client?.url ?? null;
+
+  return (
+    <div className="glass rounded-sm p-5 flex flex-col gap-3 hover:border-zinc-300 dark:hover:border-zinc-700 transition-all duration-300 h-full">
+      <div className="flex items-start justify-between gap-3">
+        <div className="flex items-start gap-3 min-w-0">
+          <div className="w-8 h-8 rounded-sm bg-zinc-100 dark:bg-zinc-800 flex items-center justify-center flex-shrink-0">
+            <Icon size={14} className="text-zinc-500 dark:text-zinc-400" />
+          </div>
+          <div className="min-w-0">
+            <p className="text-[10px] text-zinc-400 tracking-widest uppercase mb-0.5">{category}</p>
+            <h3 className="text-sm font-bold text-zinc-900 dark:text-zinc-100 leading-tight">{project.name}</h3>
+          </div>
+        </div>
+        {link && (
+          <a href={link} target="_blank" rel="noopener noreferrer"
+            className="flex-shrink-0 w-7 h-7 flex items-center justify-center rounded-sm border border-zinc-200 dark:border-zinc-700 text-zinc-400 hover:text-zinc-700 dark:hover:text-zinc-200 hover:border-zinc-400 transition-all"
+            aria-label={`View ${project.name}`}>
+            <ExternalLink size={11} />
+          </a>
+        )}
+      </div>
+      <p className="text-xs text-zinc-500 dark:text-zinc-400 leading-relaxed flex-1">{tagline}</p>
+      <div className="flex flex-wrap gap-1.5">
+        {project.stack.map((tech) => (
+          <span key={tech} className="text-[10px] px-1.5 py-0.5 rounded-sm bg-zinc-100 dark:bg-zinc-800/60 text-zinc-500 dark:text-zinc-300 border border-zinc-200 dark:border-zinc-700">
+            {tech}
+          </span>
+        ))}
+      </div>
+    </div>
+  );
+}
+
 // ── Main ─────────────────────────────────────────────────────────────────────
 export default function Projects() {
   const [showAll, setShowAll] = useState(false);
   const [activeCategory, setActiveCategory] = useState<string>("All");
+  const [viewMode, setViewMode] = useState<"list" | "card">("card");
   const { lang } = useLang();
   const t = i18n[lang].projects;
 
   const featured = PROJECTS.filter((p) => p.featured);
   const additional = PROJECTS.filter((p) => !p.featured);
   const visible = activeCategory === "All"
-    ? (showAll ? PROJECTS : featured)
+    ? (viewMode === "card" ? PROJECTS : showAll ? PROJECTS : featured)
     : PROJECTS.filter((p) => p.category === activeCategory);
 
   const handleCategoryClick = (cat: string) => {
@@ -877,74 +918,101 @@ export default function Projects() {
   return (
     <section id="projects" className="section-padding border-t border-zinc-200/60 dark:border-zinc-800/60">
       <div className="max-w-6xl mx-auto">
-        <ScrollReveal>
-          <p className="text-xs font-medium tracking-[0.3em] uppercase text-zinc-500 mb-4">
-            {t.label}
-          </p>
-          <div className="flex items-end justify-between mb-8">
-            <h2 className="text-3xl md:text-4xl font-bold text-zinc-900 dark:text-zinc-100">
-              {t.heading}
-            </h2>
-            <div className="flex flex-col items-end gap-1.5">
-              <span className="hidden sm:block text-xs text-zinc-400 dark:text-zinc-500 tracking-widest uppercase">
-                {t.countLabel(PROJECTS.length)}
-              </span>
-              <span className="hidden sm:flex items-center gap-1.5 text-[10px] text-zinc-400 dark:text-zinc-500">
-                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 2a10 10 0 1 0 0 20A10 10 0 0 0 12 2z"/><path d="M12 8v4l3 3"/></svg>
-                Hover to see a quick preview
-              </span>
-              <span className="flex sm:hidden items-center gap-1.5 text-[10px] text-zinc-400 dark:text-zinc-500">
-                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 11V6a2 2 0 0 0-4 0v5"/><path d="M14 10V4a2 2 0 0 0-4 0v6"/><path d="M10 10.5V6a2 2 0 0 0-4 0v8"/><path d="M6 14a4 4 0 0 0 4 4h4a4 4 0 0 0 4-4v-2.5"/></svg>
-                Tap to see a quick preview
-              </span>
-            </div>
-          </div>
+        <p className="text-xs font-medium tracking-[0.3em] uppercase text-zinc-500 mb-4">
+          {t.label}
+        </p>
 
-          {/* Category filter tabs */}
-          <div className="flex items-center gap-2 overflow-x-auto pb-2 mb-8 scrollbar-hide">
-            {/* "All" tab */}
+        {/* Heading + view-toggle — outside ScrollReveal so clicks are never intercepted */}
+        <div className="flex items-end justify-between mb-8">
+          <h2 className="text-3xl md:text-4xl font-bold text-zinc-900 dark:text-zinc-100">
+            {t.heading}
+          </h2>
+          <div className="flex flex-col items-end gap-2">
+            <span className="hidden sm:block text-xs text-zinc-400 dark:text-zinc-500 tracking-widest uppercase">
+              {t.countLabel(PROJECTS.length)}
+            </span>
+            <div className="flex items-center rounded-sm border border-zinc-200 dark:border-zinc-700 overflow-hidden">
+              <button
+                id="view-card"
+                type="button"
+                onClick={() => setViewMode("card")}
+                aria-label="Card view"
+                className={`cursor-pointer w-9 h-9 flex items-center justify-center transition-colors duration-150 ${viewMode === "card" ? "bg-zinc-900 dark:bg-zinc-100 text-white dark:text-zinc-900" : "bg-white dark:bg-zinc-900 text-zinc-400 dark:text-zinc-500 hover:bg-zinc-100 dark:hover:bg-zinc-800 hover:text-zinc-700 dark:hover:text-zinc-300"}`}
+              >
+                <LayoutGrid size={15} />
+              </button>
+              <span className="w-px h-5 bg-zinc-200 dark:bg-zinc-700 flex-shrink-0" />
+              <button
+                id="view-list"
+                type="button"
+                onClick={() => setViewMode("list")}
+                aria-label="List view"
+                className={`cursor-pointer w-9 h-9 flex items-center justify-center transition-colors duration-150 ${viewMode === "list" ? "bg-zinc-900 dark:bg-zinc-100 text-white dark:text-zinc-900" : "bg-white dark:bg-zinc-900 text-zinc-400 dark:text-zinc-500 hover:bg-zinc-100 dark:hover:bg-zinc-800 hover:text-zinc-700 dark:hover:text-zinc-300"}`}
+              >
+                <LayoutList size={15} />
+              </button>
+            </div>
+            {viewMode === "list" && (
+              <>
+                <span className="hidden sm:flex items-center gap-1.5 text-[10px] text-zinc-400 dark:text-zinc-500">
+                  <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 2a10 10 0 1 0 0 20A10 10 0 0 0 12 2z"/><path d="M12 8v4l3 3"/></svg>
+                  Hover to see a quick preview
+                </span>
+                <span className="flex sm:hidden items-center gap-1.5 text-[10px] text-zinc-400 dark:text-zinc-500">
+                  <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 11V6a2 2 0 0 0-4 0v5"/><path d="M14 10V4a2 2 0 0 0-4 0v6"/><path d="M10 10.5V6a2 2 0 0 0-4 0v8"/><path d="M6 14a4 4 0 0 0 4 4h4a4 4 0 0 0 4-4v-2.5"/></svg>
+                  Tap to see a quick preview
+                </span>
+              </>
+            )}
+          </div>
+        </div>
+
+        {/* Category filter tabs — outside ScrollReveal so clicks always register */}
+        <div className="flex items-center gap-2 overflow-x-auto pb-2 mb-8 scrollbar-hide">
+          {/* "All" tab */}
+          <button
+            onClick={() => handleCategoryClick("All")}
+            className={`flex-shrink-0 text-xs px-3 py-1.5 rounded-sm border tracking-wide transition-all duration-200 ${
+              activeCategory === "All"
+                ? "border-zinc-800 dark:border-zinc-300 bg-zinc-900 dark:bg-zinc-100 text-white dark:text-zinc-900 font-medium"
+                : "border-zinc-300 dark:border-zinc-700 text-zinc-500 dark:text-zinc-400 hover:border-zinc-500 dark:hover:border-zinc-500 hover:text-zinc-800 dark:hover:text-zinc-200"
+            }`}
+          >
+            {t.filterAll}
+          </button>
+          {CATEGORIES.map(({ en, jp }) => (
             <button
-              onClick={() => handleCategoryClick("All")}
+              key={en}
+              onClick={() => handleCategoryClick(en)}
               className={`flex-shrink-0 text-xs px-3 py-1.5 rounded-sm border tracking-wide transition-all duration-200 ${
-                activeCategory === "All"
+                activeCategory === en
                   ? "border-zinc-800 dark:border-zinc-300 bg-zinc-900 dark:bg-zinc-100 text-white dark:text-zinc-900 font-medium"
                   : "border-zinc-300 dark:border-zinc-700 text-zinc-500 dark:text-zinc-400 hover:border-zinc-500 dark:hover:border-zinc-500 hover:text-zinc-800 dark:hover:text-zinc-200"
               }`}
             >
-              {t.filterAll}
+              {lang === "jp" ? jp : en}
             </button>
-            {CATEGORIES.map(({ en, jp }) => (
-              <button
-                key={en}
-                onClick={() => handleCategoryClick(en)}
-                className={`flex-shrink-0 text-xs px-3 py-1.5 rounded-sm border tracking-wide transition-all duration-200 ${
-                  activeCategory === en
-                    ? "border-zinc-800 dark:border-zinc-300 bg-zinc-900 dark:bg-zinc-100 text-white dark:text-zinc-900 font-medium"
-                    : "border-zinc-300 dark:border-zinc-700 text-zinc-500 dark:text-zinc-400 hover:border-zinc-500 dark:hover:border-zinc-500 hover:text-zinc-800 dark:hover:text-zinc-200"
-                }`}
-              >
-                {lang === "jp" ? jp : en}
-              </button>
+          ))}
+        </div>
+
+        {/* Proprietary note */}
+        <p className="text-[11px] text-zinc-400 dark:text-zinc-500 mb-2">
+          * {t.proprietaryNote}
+        </p>
+
+        {viewMode === "card" ? (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-8">
+            {visible.map((project) => (
+              <ProjectCard key={project.id} project={project} />
             ))}
           </div>
-
-          {/* Proprietary note */}
-          <p className="text-[11px] text-zinc-400 dark:text-zinc-500 mt-2">
-            * {t.proprietaryNote}
-          </p>
-        </ScrollReveal>
-
-        <div className="flex flex-col gap-3 mt-8">
-          {visible.map((project, i) => (
-            <ScrollReveal key={project.id} delay={(i % 6) * 80}>
-              <div className="group glass rounded-sm hover:border-zinc-300 dark:hover:border-zinc-700 transition-all duration-300 overflow-hidden">
-
-                {/* Main content */}
+        ) : (
+          <div className="flex flex-col gap-3 mt-8">
+            {visible.map((project) => (
+              <div key={project.id} className="group glass rounded-sm hover:border-zinc-300 dark:hover:border-zinc-700 transition-all duration-300 overflow-hidden">
                 <div className="flex gap-5 p-5">
                   <ProjectContent project={project} />
                 </div>
-
-                {/* Animation strip — expands from 0 on hover */}
                 {ANIM_IDS.has(project.id) && (
                   <div className="grid transition-all duration-500 ease-in-out grid-rows-[0fr] group-hover:grid-rows-[1fr]">
                     <div className="overflow-hidden">
@@ -955,32 +1023,31 @@ export default function Projects() {
                   </div>
                 )}
               </div>
-            </ScrollReveal>
-          ))}
-        </div>
+            ))}
+          </div>
+        )}
 
-        {/* See more / collapse toggle — only shown in "All" view */}
-        {activeCategory === "All" && additional.length > 0 && (
-          <ScrollReveal delay={100}>
-            <div className="mt-8 flex justify-center">
-              <button
-                onClick={() => setShowAll((prev) => !prev)}
-                className="group inline-flex items-center gap-2 px-5 py-2.5 border border-zinc-300 dark:border-zinc-700 text-zinc-600 dark:text-zinc-400 text-xs font-medium tracking-widest uppercase rounded-sm hover:border-zinc-400 dark:hover:border-zinc-500 hover:text-zinc-900 dark:hover:text-white transition-all duration-200"
-              >
-                {showAll ? (
-                  <>
-                    <ChevronUp size={13} className="group-hover:-translate-y-0.5 transition-transform" />
-                    {t.showLess}
-                  </>
-                ) : (
-                  <>
-                    <ChevronDown size={13} className="group-hover:translate-y-0.5 transition-transform" />
-                    {t.moreProjects(additional.length)}
-                  </>
-                )}
-              </button>
-            </div>
-          </ScrollReveal>
+        {/* See more / collapse toggle — only shown in list view "All" */}
+        {viewMode === "list" && activeCategory === "All" && additional.length > 0 && (
+          <div className="mt-8 flex justify-center">
+            <button
+              type="button"
+              onClick={() => setShowAll((prev) => !prev)}
+              className="group inline-flex items-center gap-2 px-5 py-2.5 border border-zinc-300 dark:border-zinc-700 text-zinc-600 dark:text-zinc-400 text-xs font-medium tracking-widest uppercase rounded-sm hover:border-zinc-400 dark:hover:border-zinc-500 hover:text-zinc-900 dark:hover:text-white transition-all duration-200"
+            >
+              {showAll ? (
+                <>
+                  <ChevronUp size={13} className="group-hover:-translate-y-0.5 transition-transform" />
+                  {t.showLess}
+                </>
+              ) : (
+                <>
+                  <ChevronDown size={13} className="group-hover:translate-y-0.5 transition-transform" />
+                  {t.moreProjects(additional.length)}
+                </>
+              )}
+            </button>
+          </div>
         )}
 
       </div>

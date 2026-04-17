@@ -117,7 +117,7 @@ export default function ChatWidget() {
         }
       `}</style>
 
-      <div className="fixed bottom-20 right-6 z-50 flex flex-col items-end gap-3">
+      <div className="fixed bottom-20 right-6 z-50 flex flex-col items-end gap-3 pointer-events-none">
         {/* Chat panel */}
         <div
           className={`flex flex-col rounded-sm border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 shadow-2xl shadow-black/20 dark:shadow-black/50 overflow-hidden transition-all duration-300 origin-bottom-left ${
@@ -215,6 +215,8 @@ export default function ChatWidget() {
             >
               <input
                 ref={inputRef}
+                id="chat-input"
+                name="chat-input"
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
                 placeholder={t.placeholder}
@@ -238,12 +240,12 @@ export default function ChatWidget() {
         <button
           onClick={() => setOpen((prev) => !prev)}
           aria-label={t.toggleLabel}
-          className="group flex items-center gap-2 px-3 py-3 sm:px-4 bg-white dark:bg-zinc-900 border border-zinc-300 dark:border-zinc-700 rounded-full text-zinc-700 dark:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-800 hover:border-zinc-400 dark:hover:border-zinc-500 hover:text-zinc-900 dark:hover:text-white transition-all duration-300 shadow-lg shadow-black/10 dark:shadow-black/30"
+          className="pointer-events-auto group flex items-center gap-2 px-3 py-3 sm:px-4 bg-green-500 dark:bg-green-400 border border-green-500 dark:border-green-400 rounded-full text-white dark:text-zinc-900 hover:bg-green-600 dark:hover:bg-green-300 hover:border-green-600 dark:hover:border-green-300 transition-all duration-300 shadow-lg shadow-green-500/20 dark:shadow-green-400/20"
         >
-          <span className="text-green-500 flex-shrink-0">
+          <span className="flex-shrink-0">
             <SparkleIcon size={20} />
           </span>
-          <span className="hidden sm:block text-xs font-medium tracking-wide whitespace-nowrap">
+          <span className="hidden sm:block text-xs font-semibold tracking-wide whitespace-nowrap">
             {t.toggleLabel}
           </span>
         </button>

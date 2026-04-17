@@ -80,11 +80,9 @@ export default function Navbar() {
           <button
             onClick={toggleLang}
             aria-label="Toggle language"
-            className="flex items-center gap-1 px-3 py-2 rounded-sm border border-zinc-300 dark:border-zinc-700 hover:border-zinc-500 dark:hover:border-zinc-500 transition-all"
+            className="px-3 py-2 rounded-sm border border-zinc-300 dark:border-zinc-700 hover:border-zinc-500 dark:hover:border-zinc-500 transition-all text-xs font-semibold tracking-widest text-zinc-900 dark:text-zinc-100"
           >
-            <span className={`text-xs font-semibold tracking-widest transition-colors ${lang === "en" ? "text-zinc-900 dark:text-zinc-100" : "text-zinc-400 dark:text-zinc-600"}`}>EN</span>
-            <span className="text-zinc-300 dark:text-zinc-700 text-xs">|</span>
-            <span className={`text-xs font-semibold tracking-widest transition-colors ${lang === "jp" ? "text-zinc-900 dark:text-zinc-100" : "text-zinc-400 dark:text-zinc-600"}`}>JP</span>
+            {lang === "en" ? "日本語" : "English"}
           </button>
           {mounted && (
             <button
@@ -182,7 +180,7 @@ export default function Navbar() {
               onClick={toggleLang}
               className="text-left text-sm font-medium text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors py-1"
             >
-              {lang === "en" ? "日本語に切り替え" : "Switch to English"}
+              {lang === "en" ? "日本語" : "English"}
             </button>
           </nav>
         </div>

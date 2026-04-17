@@ -262,10 +262,16 @@ export type EducationEntry = {
 export const EDUCATION: EducationEntry[] = [
   {
     period: "2019 – 2023",
-    degree: "Bachelor of Engineering in Computer Science",
+    degree: "BTech, Computer Science",
     institution: "Dayananda Sagar University",
     location: "Bangalore, India",
     url: "https://www.dsu.edu.in/",
+  },
+  {
+    period: "2017 – 2019",
+    degree: "CBSE, Science",
+    institution: "Sri Chaitanya College of Education",
+    location: "Bangalore, India",
   },
 ];
 
