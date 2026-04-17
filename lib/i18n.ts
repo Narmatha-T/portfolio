@@ -4,6 +4,12 @@ export type TranslatedHighlight = { title: string; description: string };
 export type TranslatedProjectData = {
   [id: string]: { tagline: string; description: string; category: string };
 };
+export type TranslatedPublicationData = {
+  title: string;
+  venue: string;
+  date: string;
+  authors: string;
+}[];
 
 const en = {
   nav: {
@@ -57,6 +63,8 @@ const en = {
     filterAll: "All",
     proprietaryNote: "All projects are proprietary enterprise software — source code is not publicly available.",
     viewProfile: "View GitHub Profile",
+    downloadPaper: "Download Paper",
+    researchPaperCategory: "Research Paper",
   },
   experience: {
     label: "03 — Experience",
@@ -64,6 +72,9 @@ const en = {
     current: "Current",
     educationLabel: "04 — Education",
     educationHeading: "Academic Background",
+    publicationLabel: "05 — Research",
+    publicationHeading: "Publications",
+    downloadPaper: "Download Paper",
   },
   footer: {
     tagline: "Building responsibly, delivering end-to-end AI solutions.",
@@ -105,6 +116,7 @@ const en = {
     },
   ] as TranslatedHighlight[],
   projectsData: {} as TranslatedProjectData,
+  publicationsData: [] as TranslatedPublicationData,
   experienceHighlights: [
     [
       "Leading a global team of IIT engineers building production-grade SaaS systems, with all communication conducted in English.",
@@ -174,6 +186,8 @@ const jp = {
     filterAll: "すべて",
     proprietaryNote: "すべてのプロジェクトは企業向け業務システムです — ソースコードは公開されていません。",
     viewProfile: "GitHub プロフィールを見る",
+    downloadPaper: "論文をダウンロード",
+    researchPaperCategory: "研究論文",
   },
   experience: {
     label: "03 — 経験",
@@ -181,6 +195,9 @@ const jp = {
     current: "現職",
     educationLabel: "04 — 学歴",
     educationHeading: "学術的背景",
+    publicationLabel: "05 — 研究",
+    publicationHeading: "論文・出版物",
+    downloadPaper: "論文をダウンロード",
   },
   footer: {
     tagline: "責任ある開発で、AIをエンドツーエンドに。",
@@ -283,6 +300,14 @@ const jp = {
       category: "生成AI",
     },
   } as TranslatedProjectData,
+  publicationsData: [
+    {
+      title: "ディープラーニング技術を用いたポットホール検出によるインテリジェント・ドライバー・アラートシステム",
+      venue: "International Journal of Research Publication and Reviews, Vol. 1, Issue 1",
+      date: "2023年3月",
+      authors: "Narmatha Thiyagarajan ほか",
+    },
+  ] as TranslatedPublicationData,
   experienceHighlights: [
     [
       "インド工科大学（IIT）出身エンジニア4名からなるグローバル開発チームをリードし、本番グレードのコンピュータービジョン・LLM/RAGシステムをすべて英語で構築・納品。",

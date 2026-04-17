@@ -240,7 +240,7 @@ export default function ChatWidget() {
         <button
           onClick={() => setOpen((prev) => !prev)}
           aria-label={t.toggleLabel}
-          className="pointer-events-auto group flex items-center gap-2 px-3 py-3 sm:px-4 bg-green-500 dark:bg-green-400 border border-green-500 dark:border-green-400 rounded-full text-white dark:text-zinc-900 hover:bg-green-600 dark:hover:bg-green-300 hover:border-green-600 dark:hover:border-green-300 transition-all duration-300 shadow-lg shadow-green-500/20 dark:shadow-green-400/20"
+          className="pointer-events-auto group flex items-center gap-2 px-3 py-3 sm:px-4 bg-green-500 dark:bg-green-400 border border-green-500 dark:border-green-400 rounded-full text-white dark:text-zinc-900 hover:bg-green-600 dark:hover:bg-green-500 hover:border-green-600 dark:hover:border-green-500 transition-all duration-300 shadow-lg shadow-green-500/20 dark:shadow-green-400/20"
         >
           <span className="flex-shrink-0">
             <SparkleIcon size={20} />

@@ -1,8 +1,8 @@
 "use client";
 
-import { ChevronDown, ChevronUp, ExternalLink, LayoutGrid, LayoutList } from "lucide-react";
+import { BookOpen, ChevronDown, ChevronUp, Download, ExternalLink, LayoutGrid, LayoutList } from "lucide-react";
 import { useState } from "react";
-import { PROJECTS, type Project } from "@/lib/data";
+import { PROJECTS, PUBLICATIONS, type Project, type PublicationEntry } from "@/lib/data";
 import { useLang } from "@/context/LanguageContext";
 import { i18n } from "@/lib/i18n";
 
@@ -853,6 +853,7 @@ const CATEGORIES: { en: string; jp: string }[] = [
   { en: "AIoT",                   jp: "AIoT" },
   { en: "Generative AI",          jp: "生成AI" },
   { en: "Infrastructure Automation", jp: "インフラ自動化" },
+  { en: "Research Paper",         jp: "研究論文" },
 ];
 
 // ── Card view ────────────────────────────────────────────────────────────────
@@ -896,6 +897,52 @@ function ProjectCard({ project }: { project: Project }) {
   );
 }
 
+// ── Publication card ─────────────────────────────────────────────────────────
+function PublicationCard({ pub, index }: { pub: PublicationEntry; index: number }) {
+  const { lang } = useLang();
+  const t = i18n[lang].projects;
+  const jp = i18n.jp.publicationsData[index];
+  const title   = lang === "jp" && jp ? jp.title   : pub.title;
+  const venue   = lang === "jp" && jp ? jp.venue   : pub.venue;
+  const date    = lang === "jp" && jp ? jp.date    : pub.date;
+  const authors = lang === "jp" && jp ? jp.authors : pub.authors;
+
+  return (
+    <div className="glass rounded-sm p-5 flex flex-col gap-3 hover:border-zinc-300 dark:hover:border-zinc-700 transition-all duration-300 h-full">
+      <div className="flex items-start justify-between gap-3">
+        <div className="flex items-start gap-3 min-w-0">
+          <div className="w-8 h-8 rounded-sm bg-zinc-100 dark:bg-zinc-800 flex items-center justify-center flex-shrink-0">
+            <BookOpen size={14} className="text-zinc-500 dark:text-zinc-400" />
+          </div>
+          <div className="min-w-0">
+            <p className="text-[10px] text-zinc-400 tracking-widest uppercase mb-0.5">{t.researchPaperCategory}</p>
+            <h3 className="text-sm font-bold text-zinc-900 dark:text-zinc-100 leading-tight">{title}</h3>
+          </div>
+        </div>
+        <a
+          href={pub.downloadUrl}
+          download
+          aria-label={t.downloadPaper}
+          className="flex-shrink-0 w-7 h-7 flex items-center justify-center rounded-sm border border-zinc-200 dark:border-zinc-700 text-zinc-400 hover:text-zinc-700 dark:hover:text-zinc-200 hover:border-zinc-400 transition-all"
+        >
+          <Download size={13} />
+        </a>
+      </div>
+      <div>
+        <p className="text-xs text-zinc-500 dark:text-zinc-400">{venue}</p>
+        <p className="text-xs text-zinc-400 dark:text-zinc-500 mt-0.5">{date} · {authors}</p>
+      </div>
+      <div className="flex flex-wrap gap-1.5">
+        {pub.stack.map((tech) => (
+          <span key={tech} className="text-[10px] px-1.5 py-0.5 rounded-sm bg-zinc-100 dark:bg-zinc-800/60 text-zinc-500 dark:text-zinc-300 border border-zinc-200 dark:border-zinc-700 h-fit">
+            {tech}
+          </span>
+        ))}
+      </div>
+    </div>
+  );
+}
+
 // ── Main ─────────────────────────────────────────────────────────────────────
 export default function Projects() {
   const [showAll, setShowAll] = useState(false);
@@ -906,9 +953,14 @@ export default function Projects() {
 
   const featured = PROJECTS.filter((p) => p.featured);
   const additional = PROJECTS.filter((p) => !p.featured);
-  const visible = activeCategory === "All"
-    ? (viewMode === "card" ? PROJECTS : showAll ? PROJECTS : featured)
-    : PROJECTS.filter((p) => p.category === activeCategory);
+  const visible = activeCategory === "Research Paper"
+    ? []
+    : activeCategory === "All"
+      ? (viewMode === "card" ? PROJECTS : showAll ? PROJECTS : featured)
+      : PROJECTS.filter((p) => p.category === activeCategory);
+  const visiblePublications = (activeCategory === "All" || activeCategory === "Research Paper")
+    ? PUBLICATIONS
+    : [];
 
   const handleCategoryClick = (cat: string) => {
     setActiveCategory(cat);
@@ -929,7 +981,7 @@ export default function Projects() {
           </h2>
           <div className="flex flex-col items-end gap-2">
             <span className="hidden sm:block text-xs text-zinc-400 dark:text-zinc-500 tracking-widest uppercase">
-              {t.countLabel(PROJECTS.length)}
+              {t.countLabel(PROJECTS.length + PUBLICATIONS.length)}
             </span>
             <div className="flex items-center rounded-sm border border-zinc-200 dark:border-zinc-700 overflow-hidden">
               <button
@@ -1005,6 +1057,9 @@ export default function Projects() {
             {visible.map((project) => (
               <ProjectCard key={project.id} project={project} />
             ))}
+            {visiblePublications.map((pub, i) => (
+              <PublicationCard key={`pub-${i}`} pub={pub} index={i} />
+            ))}
           </div>
         ) : (
           <div className="flex flex-col gap-3 mt-8">
@@ -1024,6 +1079,45 @@ export default function Projects() {
                 )}
               </div>
             ))}
+            {visiblePublications.map((pub, i) => {
+              const jpPub = i18n.jp.publicationsData[i];
+              const lTitle   = lang === "jp" && jpPub ? jpPub.title   : pub.title;
+              const lVenue   = lang === "jp" && jpPub ? jpPub.venue   : pub.venue;
+              const lDate    = lang === "jp" && jpPub ? jpPub.date    : pub.date;
+              const lAuthors = lang === "jp" && jpPub ? jpPub.authors : pub.authors;
+              return (
+              <div key={`pub-${i}`} className="glass rounded-sm p-5 hover:border-zinc-300 dark:hover:border-zinc-700 transition-all duration-300">
+                <div className="flex gap-4">
+                  <div className="w-8 h-8 rounded-sm bg-zinc-100 dark:bg-zinc-800 flex items-center justify-center flex-shrink-0">
+                    <BookOpen size={14} className="text-zinc-500 dark:text-zinc-400" />
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-start justify-between gap-4 mb-2">
+                      <div>
+                        <p className="text-xs text-zinc-400 dark:text-zinc-400 tracking-widest mb-0.5">{t.researchPaperCategory}</p>
+                        <h3 className="text-sm font-bold text-zinc-900 dark:text-zinc-100">{lTitle}</h3>
+                        <p className="text-xs text-zinc-500 dark:text-zinc-400 mt-0.5">{lVenue}</p>
+                        <p className="text-xs text-zinc-400 dark:text-zinc-500 mt-0.5">{lDate} · {lAuthors}</p>
+                      </div>
+                    </div>
+                    <div className="flex flex-wrap items-center gap-3 mt-3 pt-3 border-t border-zinc-200/70 dark:border-zinc-800/70">
+                      <div className="flex flex-wrap gap-1.5">
+                        {pub.stack.map((tech) => (
+                          <span key={tech} className="text-xs px-2 py-0.5 rounded-sm bg-zinc-100 dark:bg-zinc-800/60 text-zinc-500 dark:text-zinc-300 border border-zinc-200 dark:border-zinc-700">
+                            {tech}
+                          </span>
+                        ))}
+                      </div>
+                      <a href={pub.downloadUrl} download className="flex items-center gap-1.5 text-xs font-semibold text-zinc-900 dark:text-zinc-100 hover:text-zinc-500 dark:hover:text-zinc-400 transition-colors">
+                        <Download size={12} />
+                        {t.downloadPaper}
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              );
+            })}
           </div>
         )}
 
