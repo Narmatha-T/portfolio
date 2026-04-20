@@ -104,7 +104,7 @@ export default function Hero() {
             <div className="flex flex-wrap gap-4">
               <a
                 href="#projects"
-                className="group inline-flex items-center gap-2 px-6 py-3 bg-green-500 dark:bg-green-400 text-white dark:text-zinc-900 text-sm font-semibold rounded-sm hover:bg-green-600 dark:hover:bg-green-300 transition-all duration-200"
+                className="group inline-flex items-center gap-2 px-6 py-3 bg-green-500 dark:bg-green-400 text-white dark:text-zinc-900 text-sm font-semibold rounded-sm hover:bg-green-600 dark:hover:bg-green-500 transition-all duration-200"
               >
                 {t.ctaProjects}
                 <ExternalLink
