@@ -139,7 +139,12 @@ export default function Experience() {
                     {/* Timeline dot */}
                     <div className="absolute left-0 top-1 w-2 h-2 rounded-full border border-zinc-300 dark:border-zinc-600 bg-white dark:bg-zinc-950 hidden sm:block -translate-x-[1px]" />
 
-                    <div className="glass rounded-sm p-6">
+                    <a
+                      href={edu.url ?? undefined}
+                      target={edu.url ? "_blank" : undefined}
+                      rel={edu.url ? "noopener noreferrer" : undefined}
+                      className={`glass rounded-sm p-6 block transition-all duration-300 hover:border-zinc-300 dark:hover:border-zinc-700${edu.url ? " cursor-pointer group/card" : ""}`}
+                    >
                       <div className="flex items-start gap-4">
                         <div className="w-9 h-9 rounded-sm bg-zinc-100 dark:bg-zinc-800 flex items-center justify-center flex-shrink-0">
                           <GraduationCap size={16} className="text-zinc-500 dark:text-zinc-400" />
@@ -148,21 +153,18 @@ export default function Experience() {
                           <h3 className="text-base font-bold text-zinc-900 dark:text-zinc-100 mb-0.5">
                             {degree}
                           </h3>
-                          <p className="text-sm font-medium text-zinc-600 dark:text-zinc-400">
-                            {edu.url ? (
-                              <a href={edu.url} target="_blank" rel="noopener noreferrer"
-                                className="inline-flex items-center gap-1 hover:text-zinc-900 dark:hover:text-zinc-200 transition-colors group/edu">
-                                {institution}
-                                <ExternalLink size={11} className="opacity-0 group-hover/edu:opacity-60 transition-opacity" />
-                              </a>
-                            ) : institution}
+                          <p className="text-sm font-medium text-zinc-600 dark:text-zinc-400 inline-flex items-center gap-1">
+                            {institution}
+                            {edu.url && (
+                              <ExternalLink size={11} className="opacity-0 group-hover/card:opacity-60 transition-opacity" />
+                            )}
                           </p>
                           <p className="text-xs text-zinc-400 dark:text-zinc-600 mt-0.5">
                             {location}
                           </p>
                         </div>
                       </div>
-                    </div>
+                    </a>
                   </div>
                 </div>
               </ScrollReveal>

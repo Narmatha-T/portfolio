@@ -294,6 +294,7 @@ export const EDUCATION: EducationEntry[] = [
     degree: "CBSE, Science",
     institution: "Sri Chaitanya College of Education",
     location: "Bangalore, India",
+    url: "https://srichaitanya.net/",
   },
 ];
 
